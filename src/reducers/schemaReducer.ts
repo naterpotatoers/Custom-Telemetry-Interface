@@ -21,8 +21,12 @@ export function schemaReducer(schema: JsonSchema, action: any) {
           properties: {
             ...schema.properties,
             [action.key]: {
-              ...schema.properties[action.key],
-              [action.property]: action.value,
+              title: action.title,
+              type: action.dataType,
+              description: action.description,
+              default: action.default,
+              minimum: action.minimum,
+              maximum: action.maximum,
             },
           },
         };

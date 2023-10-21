@@ -37,7 +37,7 @@ export default function FormEditor() {
           );
           const isString = schema.properties[property].type === "string";
           return (
-            <div style={{ margin: "10px" }}>
+            <div style={{ margin: "10px" }} key={property}>
               <label>
                 Key:
                 <input
