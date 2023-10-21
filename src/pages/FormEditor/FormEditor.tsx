@@ -17,13 +17,6 @@ export default function FormEditor() {
     });
   };
 
-  const handleDelete = (key: string) => {
-    dispatch({
-      type: "DELETE_PROPERTY",
-      key,
-    });
-  };
-
   return (
     <div>
       <h1>Form Editor</h1>
@@ -36,7 +29,7 @@ export default function FormEditor() {
             <PropertyCard
               propertyKey={key}
               property={property}
-              handleDelete={handleDelete}
+              dispatch={dispatch}
             />
           </div>
         ))}

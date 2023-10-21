@@ -1,17 +1,35 @@
+import { ChangeEvent } from "react";
 import { JsonSchemaProperty } from "../../../types";
 
 export default function PropertyCard({
   propertyKey,
   property,
-  handleDelete,
+  dispatch,
 }: {
   propertyKey: string;
   property: JsonSchemaProperty;
-  handleDelete: (key: string) => void;
+  dispatch: React.Dispatch<any>;
 }) {
   const isNumberOrString = ["number", "integer", "string"].includes(
     property.type
   );
+
+  const handleDelete = () => {
+    dispatch({
+      type: "DELETE_PROPERTY",
+      key: propertyKey,
+    });
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // TODO: this is not working - need to figure out how to update the property
+    // dispatch({
+    //   type: "UPDATE_PROPERTY",
+    //   key: propertyKey,
+    //   [e.target.name]: e.target.value,
+    // });
+  };
+
   return (
     <>
       <label>
@@ -44,7 +62,7 @@ export default function PropertyCard({
         <input
           type="text"
           value={property.description}
-          onChange={() => {}}
+          onChange={(e) => handleChange(e)}
           name="description"
         />
       </label>
@@ -61,15 +79,25 @@ export default function PropertyCard({
         <>
           <label>
             Minimum:
-            <input type="number" id="minimum" name="minimum" />
+            <input
+              type="number"
+              value={property.minimum}
+              onChange={() => {}}
+              name="minimum"
+            />
           </label>
           <label>
             Maximum:
-            <input type="number" id="maximum" name="maximum" />
+            <input
+              type="number"
+              value={property.maximum}
+              onChange={() => {}}
+              name="maximum"
+            />
           </label>
         </>
       )}
-      <button onClick={() => handleDelete(propertyKey)}>Delete</button>
+      <button onClick={handleDelete}>Delete</button>
     </>
   );
 }

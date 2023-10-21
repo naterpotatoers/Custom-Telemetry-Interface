@@ -10,13 +10,17 @@ export const MOCK_SCHEMA: JsonSchema = {
         title: "Speed",
         type: "integer",
         description: "The speed of the device.",
-        default: 0
+        default: 0,
+        minimum: 0,
+        maximum: 100
     },
     angle: {
         title: "Angle",
         type: "integer",
         description: "The angle of the device.",
-        default: 0
+        default: 0,
+        minimum: 0,
+        maximum: 360
     },
     drive_mode: {
         title: "Drive Mode",
