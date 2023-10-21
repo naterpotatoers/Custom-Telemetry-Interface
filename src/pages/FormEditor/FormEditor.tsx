@@ -1,26 +1,23 @@
 import { useReducer } from "react";
-import { MOCK_FORM_EDITOR_OBJECT } from "../../mocks/formEditorMock";
-import { JsonSchema } from "../../types";
+import { MOCK_SCHEMA } from "../../mocks/formEditorMock";
+import { schemaReducer } from "../../reducers";
 
 export default function FormEditor() {
-  const [formEditorSchema, dispatch] = useReducer(
-    formEditorSchemaReducer,
-    MOCK_FORM_EDITOR_OBJECT
-  );
-  const properties = Object.keys(formEditorSchema.properties);
+  const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
+  const properties = Object.keys(schema.properties);
 
   const handleNewProperty = () => {
     dispatch({
-      type: "ADD_STRING_PROPERTY",
-      key: "propertyKey",
-      title: "Title",
+      type: "ADD_PROPERTY",
+      key: Date.now().toString(),
+      title: "",
       dataType: "string",
-      description: "property description",
-      default: "default value",
+      description: "",
+      default: "",
     });
   };
 
-  const handleDeleteProperty = (key: string) => {
+  const handleDelete = (key: string) => {
     dispatch({
       type: "DELETE_PROPERTY",
       key,
@@ -35,51 +32,94 @@ export default function FormEditor() {
       </div>
       <div>
         {properties.map((property) => {
+          const isNumberOrInteger = ["number", "integer"].includes(
+            schema.properties[property].type
+          );
+          const isString = schema.properties[property].type === "string";
           return (
             <div style={{ margin: "10px" }}>
-              <div>Key: {property}</div>
-              <div>Title: {formEditorSchema.title}</div>
-              <div>Data Type: {formEditorSchema.properties[property].type}</div>
-              <div>
-                Description: {formEditorSchema.properties[property].description}
-              </div>
-              <div>
-                Default: {formEditorSchema.properties[property].default}
-              </div>
-              <button onClick={() => handleDeleteProperty(property)}>
-                Delete
-              </button>
+              <label>
+                Key:
+                <input
+                  type="text"
+                  value={property}
+                  onChange={() => {}}
+                  name="key"
+                />
+              </label>
+              <label>
+                Title:
+                <input
+                  type="text"
+                  value={schema.properties[property].title}
+                  onChange={() => {}}
+                  name="title"
+                />
+              </label>
+              <label>
+                Description:
+                <input
+                  type="text"
+                  value={schema.properties[property].description}
+                  onChange={() => {}}
+                  name="description"
+                />
+              </label>
+              <label>
+                Data Type:
+                <select
+                  value={schema.properties[property].type}
+                  onChange={() => {}}
+                  name="dataType"
+                >
+                  <option value="string">String</option>
+                  <option value="number">Number</option>
+                  <option value="integer">Integer</option>
+                  <option value="boolean">Boolean</option>
+                  <option value="object">Object</option>
+                  <option value="array">Array</option>
+                  <option value="null">Null</option>
+                </select>
+              </label>
+              <label>
+                Default:
+                <input
+                  type="text"
+                  value={schema.properties[property].default}
+                  onChange={() => {}}
+                  name="default"
+                />
+              </label>
+              {isNumberOrInteger && (
+                <>
+                  <label>
+                    Minimum:
+                    <input type="number" id="minimum" name="minimum" />
+                  </label>
+                  <label>
+                    Maximum:
+                    <input type="number" id="maximum" name="maximum" />
+                  </label>
+                </>
+              )}
+              {isString && (
+                <>
+                  <label>
+                    Minimum Length:
+                    <input type="number" id="minLength" name="minLength" />
+                  </label>
+                  <label>
+                    Maximum Length:
+                    <input type="number" id="maxLength" name="maxLength" />
+                  </label>
+                </>
+              )}
+              <button onClick={() => handleDelete(property)}>Delete</button>
             </div>
           );
         })}
       </div>
+      <pre>{JSON.stringify(schema, null, 2)}</pre>
     </div>
   );
-}
-
-function formEditorSchemaReducer(schema: JsonSchema, action: any) {
-  switch (action.type) {
-    case "ADD_STRING_PROPERTY":
-      return {
-        ...schema,
-        properties: {
-          ...schema.properties,
-          [action.key]: {
-            title: action.title,
-            type: action.dataType,
-            description: action.description,
-            default: action.default,
-          },
-        },
-      };
-    case "DELETE_PROPERTY":
-      const newProperties = { ...schema.properties };
-      delete newProperties[action.key];
-      return {
-        ...schema,
-        properties: newProperties,
-      };
-    default:
-      return schema;
-  }
 }

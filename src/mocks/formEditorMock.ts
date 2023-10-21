@@ -1,6 +1,6 @@
 import { JsonSchema } from "../types";
 
-export const MOCK_FORM_EDITOR_OBJECT: JsonSchema = {
+export const MOCK_SCHEMA: JsonSchema = {
   $id: "https://example.com/form.editor.mock.schema.json",
   $schema: "https://json-schema.org/draft/2020-12/schema",
   title: "Mock Form Editor",
