@@ -14,6 +14,13 @@ export default function PropertyCard({
   const isNumberOrString = ["number", "integer", "string"].includes(
     property.type
   );
+  const MinMaxLengthSuffix = property.type === "string" ? "Length" : "Value";
+  const defaultType =
+    property.type === "string"
+      ? "text"
+      : property.type === "boolean"
+      ? "checkbox"
+      : "number";
 
   const handleDelete = () => {
     dispatch({
@@ -30,6 +37,29 @@ export default function PropertyCard({
     });
   };
 
+  const handleTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    let newDefault = property.default;
+    if (e.target.value === "string") {
+      newDefault = "";
+    }
+    if (e.target.value === "number") {
+      newDefault = 0;
+    }
+    if (e.target.value === "integer") {
+      newDefault = 0;
+    }
+    if (e.target.value === "boolean") {
+      newDefault = false;
+    }
+    dispatch({
+      type: "UPDATE_PROPERTY",
+      key: propertyKey,
+      name: "type",
+      dataType: e.target.value,
+      default: newDefault,
+    });
+  };
+
   const handlePropertyChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: "UPDATE_PROPERTY_FIELD",
@@ -43,7 +73,11 @@ export default function PropertyCard({
     <>
       <label>
         Data Type:
-        <select value={property.type} onChange={() => {}} name="dataType">
+        <select
+          value={property.type}
+          onChange={(e) => handleTypeChange(e)}
+          name="dataType"
+        >
           <option value="string">String</option>
           <option value="number">Number</option>
           <option value="integer">Integer</option>
@@ -81,32 +115,33 @@ export default function PropertyCard({
           name="description"
         />
       </label>
+      {/* TODO: throws console warning: a component is changing an uncontrolled input to be controlled */}
       <label>
         Default:
         <input
-          type="text"
-          value={property.default.toString()}
-          onChange={() => {}}
+          type={defaultType}
+          value={property.default as any}
+          onChange={(e) => handlePropertyChange(e)}
           name="default"
         />
       </label>
       {isNumberOrString && (
         <>
           <label>
-            Minimum:
+            Minimum {MinMaxLengthSuffix}:
             <input
               type="number"
               value={property.minimum}
-              onChange={() => {}}
+              onChange={(e) => handlePropertyChange(e)}
               name="minimum"
             />
           </label>
           <label>
-            Maximum:
+            Maximum {MinMaxLengthSuffix}:
             <input
               type="number"
               value={property.maximum}
-              onChange={() => {}}
+              onChange={(e) => handlePropertyChange(e)}
               name="maximum"
             />
           </label>
