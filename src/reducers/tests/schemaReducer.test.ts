@@ -9,7 +9,7 @@ describe("schemaReducer", () => {
 
   it("should add a property", () => {
     const action = {
-      type: "ADD_PROPERTY",
+      type: "UPDATE_PROPERTY",
       key: "test",
       title: "Test",
       dataType: "string",
@@ -28,7 +28,7 @@ describe("schemaReducer", () => {
         },
       },
     };
-    
+
     const result = schemaReducer(MOCK_SCHEMA, action);
     expect(result).toEqual(expected);
     const originalLength = Object.keys(MOCK_SCHEMA.properties).length;
@@ -63,11 +63,51 @@ describe("schemaReducer", () => {
       },
     };
 
+    it("should update a property field", () => {
+      const firstKey = Object.keys(MOCK_SCHEMA.properties)[0];
+      const action = {
+        type: "UPDATE_PROPERTY_FIELD",
+        key: firstKey,
+        name: "title",
+        value: "Test",
+      };
+      let expected = MOCK_SCHEMA;
+      expected.properties[firstKey].title = action.value;
+      const result = schemaReducer(MOCK_SCHEMA, action);
+      expect(result).toEqual(expected);
+      expect(result).not.toBe(MOCK_SCHEMA);
+    });
+
     const result = schemaReducer(MOCK_SCHEMA, action);
     expect(result).toEqual(expected);
     const originalLength = Object.keys(MOCK_SCHEMA.properties).length;
     const resultLength = Object.keys(result.properties).length;
     expect(originalLength).toBe(resultLength);
+  });
+
+  it("should update a property key", () => {
+    const firstKey = Object.keys(MOCK_SCHEMA.properties)[0];
+    const action = {
+      type: "UPDATE_PROPERTY_KEY",
+      oldKey: firstKey,
+      newKey: "test",
+    };
+    const expected = {
+      ...MOCK_SCHEMA,
+      properties: {
+        ...MOCK_SCHEMA.properties,
+      },
+    };
+    expected.properties[action.newKey] = expected.properties[action.oldKey];
+    delete expected.properties[action.oldKey];
+
+    const result = schemaReducer(MOCK_SCHEMA, action);
+    expect(result).toEqual(expected);
+    const originalLength = Object.keys(MOCK_SCHEMA.properties).length;
+    const resultLength = Object.keys(result.properties).length;
+    expect(resultLength).toBe(originalLength);
+    expect(result.properties).not.toHaveProperty(firstKey);
+    expect(result.properties).toHaveProperty("test");
   });
 
   it("should delete a property", () => {

@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { MOCK_SCHEMA } from "../../mocks/formEditorMock";
+import { MOCK_SCHEMA } from "../../mocks/SchemaMocks";
 import { schemaReducer } from "../../reducers";
 import PropertyCard from "./components/PropertyCard";
 
@@ -8,7 +8,7 @@ export default function FormEditor() {
 
   const handleNewProperty = () => {
     dispatch({
-      type: "ADD_PROPERTY",
+      type: "UPDATE_PROPERTY",
       key: Date.now().toString(),
       title: "",
       dataType: "string",
@@ -34,7 +34,6 @@ export default function FormEditor() {
           </div>
         ))}
       </div>
-      <pre>{JSON.stringify(schema, null, 2)}</pre>
     </div>
   );
 }

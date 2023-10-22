@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { JsonSchemaProperty } from "../../../types";
 
 export default function PropertyCard({
@@ -10,6 +10,7 @@ export default function PropertyCard({
   property: JsonSchemaProperty;
   dispatch: React.Dispatch<any>;
 }) {
+  const [key, setKey] = useState<string>(propertyKey);
   const isNumberOrString = ["number", "integer", "string"].includes(
     property.type
   );
@@ -21,13 +22,21 @@ export default function PropertyCard({
     });
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // TODO: this is not working - need to figure out how to update the property
-    // dispatch({
-    //   type: "UPDATE_PROPERTY",
-    //   key: propertyKey,
-    //   [e.target.name]: e.target.value,
-    // });
+  const handleKeyChange = () => {
+    dispatch({
+      type: "UPDATE_PROPERTY_KEY",
+      oldKey: propertyKey,
+      newKey: key,
+    });
+  };
+
+  const handlePropertyChange = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: "UPDATE_PROPERTY_FIELD",
+      key: propertyKey,
+      name: e.target.name,
+      value: e.target.value,
+    });
   };
 
   return (
@@ -46,14 +55,20 @@ export default function PropertyCard({
       </label>
       <label>
         Key:
-        <input type="text" value={propertyKey} onChange={() => {}} name="key" />
+        <input
+          type="text"
+          value={key}
+          onChange={(e) => setKey(e.target.value)}
+          onBlur={handleKeyChange}
+          name="key"
+        />
       </label>
       <label>
         Title:
         <input
           type="text"
           value={property.title}
-          onChange={() => {}}
+          onChange={(e) => handlePropertyChange(e)}
           name="title"
         />
       </label>
@@ -62,7 +77,7 @@ export default function PropertyCard({
         <input
           type="text"
           value={property.description}
-          onChange={(e) => handleChange(e)}
+          onChange={(e) => handlePropertyChange(e)}
           name="description"
         />
       </label>
@@ -70,7 +85,7 @@ export default function PropertyCard({
         Default:
         <input
           type="text"
-          value={property.default.toString()} // TODO: verify that this works fine
+          value={property.default.toString()}
           onChange={() => {}}
           name="default"
         />

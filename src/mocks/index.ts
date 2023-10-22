@@ -1,1 +1,1 @@
-export {MOCK_SCHEMA} from "./formEditorMock";
+export { MOCK_SCHEMA } from "./SchemaMocks";
