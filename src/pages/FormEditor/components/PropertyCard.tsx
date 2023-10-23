@@ -72,7 +72,7 @@ export default function PropertyCard({
   return (
     <>
       <label>
-        Data Type:
+        Data Type
         <select
           value={property.type}
           onChange={(e) => handleTypeChange(e)}
@@ -88,7 +88,7 @@ export default function PropertyCard({
         </select>
       </label>
       <label>
-        Key:
+        Key
         <input
           type="text"
           value={key}
@@ -98,7 +98,7 @@ export default function PropertyCard({
         />
       </label>
       <label>
-        Title:
+        Title
         <input
           type="text"
           value={property.title}
@@ -107,7 +107,7 @@ export default function PropertyCard({
         />
       </label>
       <label>
-        Description:
+        Description
         <input
           type="text"
           value={property.description}
@@ -115,9 +115,9 @@ export default function PropertyCard({
           name="description"
         />
       </label>
-      {/* TODO: throws console warning: a component is changing an uncontrolled input to be controlled */}
+      {/* TODO: throws warning "a component is changing an uncontrolled input to be controlled" */}
       <label>
-        Default:
+        Default
         <input
           type={defaultType}
           value={property.default as any}
@@ -128,7 +128,7 @@ export default function PropertyCard({
       {isNumberOrString && (
         <>
           <label>
-            Minimum {MinMaxLengthSuffix}:
+            Minimum {MinMaxLengthSuffix}
             <input
               type="number"
               value={property.minimum}
@@ -137,7 +137,7 @@ export default function PropertyCard({
             />
           </label>
           <label>
-            Maximum {MinMaxLengthSuffix}:
+            Maximum {MinMaxLengthSuffix}
             <input
               type="number"
               value={property.maximum}
