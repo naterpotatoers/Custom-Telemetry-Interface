@@ -16,3 +16,8 @@ export type JsonSchemaProperty = {
   minimum?: number;
   maximum?: number;
 };
+
+export type JsonSchemaPropertyInputField = JsonSchemaProperty & {
+  id: string;
+  value: string | number | boolean;
+};

@@ -1,1 +1,1 @@
-export { MOCK_SCHEMA } from "./SchemaMocks";
+export { MOCK_SCHEMA, MOCK_SCHEMA_STATE } from "./SchemaMocks";

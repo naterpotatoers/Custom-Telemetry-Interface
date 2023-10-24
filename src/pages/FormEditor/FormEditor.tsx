@@ -1,11 +1,13 @@
-import { useReducer } from "react";
-import { MOCK_SCHEMA } from "../../mocks/SchemaMocks";
-import { schemaReducer } from "../../reducers";
+import { JsonSchema } from "../../types";
 import PropertyCard from "./components/PropertyCard";
 
-export default function FormEditor() {
-  const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
-
+export default function FormEditor({
+  schema,
+  dispatch,
+}: {
+  schema: JsonSchema;
+  dispatch: React.Dispatch<any>;
+}) {
   const handleNewProperty = () => {
     dispatch({
       type: "UPDATE_PROPERTY",
