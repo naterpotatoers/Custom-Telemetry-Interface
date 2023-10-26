@@ -9,7 +9,13 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   );
 
   const handleChange = (e: any) => {
-    console.log(e.target.name, e.target.value);
+    const newData = data.map((property: PropertyField) => {
+      if (property.id === e.target.name) {
+        return { ...property, default: e.target.value };
+      }
+      return property;
+    });
+    setData(newData);
   };
 
   useEffect(() => {
