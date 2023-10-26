@@ -28,7 +28,7 @@ export const MOCK_SCHEMA: Schema = {
       description: "The drive mode of the device.",
       default: "D",
       minimum: 0,
-      maximum: 100,
+      maximum: 1,
     },
   },
 };
