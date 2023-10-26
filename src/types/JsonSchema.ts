@@ -1,23 +1,23 @@
-export type JsonSchema = {
+export type Schema = {
   $id: string;
   $schema: string;
   title: string;
   type: string;
   properties: {
-    [key: string]: JsonSchemaProperty;
+    [key: string]: SchemaProperty;
   };
 };
 
-export type JsonSchemaProperty = {
+export type SchemaProperty = {
   title: string;
   type: string;
   description: string;
-  default: string | number | boolean;
+  default: string | number;
   minimum?: number;
   maximum?: number;
 };
 
-export type JsonSchemaPropertyInputField = JsonSchemaProperty & {
+export type PropertyField = SchemaProperty & {
   id: string;
-  value: string | number | boolean;
+  value: string | number;
 };

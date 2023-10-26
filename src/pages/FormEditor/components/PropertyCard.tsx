@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from "react";
-import { JsonSchemaProperty } from "../../../types";
+import { SchemaProperty } from "../../../types";
 
 export default function PropertyCard({
   propertyKey,
@@ -7,7 +7,7 @@ export default function PropertyCard({
   dispatch,
 }: {
   propertyKey: string;
-  property: JsonSchemaProperty;
+  property: SchemaProperty;
   dispatch: React.Dispatch<any>;
 }) {
   const [key, setKey] = useState<string>(propertyKey);
@@ -15,12 +15,7 @@ export default function PropertyCard({
     property.type
   );
   const MinMaxLengthSuffix = property.type === "string" ? "Length" : "Value";
-  const defaultType =
-    property.type === "string"
-      ? "text"
-      : property.type === "boolean"
-      ? "checkbox"
-      : "number";
+  const defaultType = property.type === "string" ? "text" : "number";
 
   const handleDelete = () => {
     dispatch({
@@ -48,15 +43,14 @@ export default function PropertyCard({
     if (e.target.value === "integer") {
       newDefault = 0;
     }
-    if (e.target.value === "boolean") {
-      newDefault = false;
-    }
     dispatch({
       type: "UPDATE_PROPERTY",
       key: propertyKey,
       name: "type",
       dataType: e.target.value,
       default: newDefault,
+      minimum: undefined,
+      maximum: undefined,
     });
   };
 
@@ -72,7 +66,7 @@ export default function PropertyCard({
   return (
     <>
       <label>
-        Data Type
+        Type
         <select
           value={property.type}
           onChange={(e) => handleTypeChange(e)}
@@ -81,10 +75,6 @@ export default function PropertyCard({
           <option value="string">String</option>
           <option value="number">Number</option>
           <option value="integer">Integer</option>
-          <option value="boolean">Boolean</option>
-          <option value="object">Object</option>
-          <option value="array">Array</option>
-          <option value="null">Null</option>
         </select>
       </label>
       <label>

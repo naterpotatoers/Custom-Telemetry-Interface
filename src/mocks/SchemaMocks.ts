@@ -1,6 +1,6 @@
-import { JsonSchema, JsonSchemaPropertyInputField } from "../types";
+import { Schema, PropertyField } from "../types";
 
-export const MOCK_SCHEMA: JsonSchema = {
+export const MOCK_SCHEMA: Schema = {
   $id: "https://example.com/form.editor.mock.schema.json",
   $schema: "https://json-schema.org/draft/2020-12/schema",
   title: "Mock Form Editor",
@@ -8,10 +8,10 @@ export const MOCK_SCHEMA: JsonSchema = {
   properties: {
     speed: {
       title: "Speed",
-      type: "integer",
+      type: "number",
       description: "The speed of the device.",
       default: 0,
-      minimum: 0,
+      minimum: -100,
       maximum: 100,
     },
     angle: {
@@ -28,16 +28,10 @@ export const MOCK_SCHEMA: JsonSchema = {
       description: "The drive mode of the device.",
       default: "D",
     },
-    is_operational: {
-      title: "Is Operational",
-      type: "boolean",
-      description: "The operational status of the device.",
-      default: true,
-    },
   },
 };
 
-export const MOCK_SCHEMA_STATE: JsonSchemaPropertyInputField[] = [
+export const MOCK_SCHEMA_STATE: PropertyField[] = [
   {
     id: "speed",
     value: 0,
@@ -65,13 +59,5 @@ export const MOCK_SCHEMA_STATE: JsonSchemaPropertyInputField[] = [
     type: "string",
     description: "The drive mode of the device.",
     default: "D",
-  },
-  {
-    id: "is_operational",
-    value: true,
-    title: "Is Operational",
-    type: "boolean",
-    description: "The operational status of the device.",
-    default: true,
   },
 ];

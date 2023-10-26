@@ -1,6 +1,6 @@
-import { JsonSchema } from "../types";
+import { Schema } from "../types";
 
-export function schemaReducer(schema: JsonSchema, action: any) {
+export function schemaReducer(schema: Schema, action: any) {
   switch (action.type) {
     case "UPDATE_PROPERTY":
       return {

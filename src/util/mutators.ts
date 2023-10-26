@@ -1,11 +1,11 @@
-import { JsonSchema, JsonSchemaPropertyInputField } from "../types";
+import { Schema, PropertyField } from "../types";
 
-export function getJsonSchemaPropertyInputFields(
-  schema: JsonSchema
-): JsonSchemaPropertyInputField[] {
+export function getPropertyFields(
+  schema: Schema
+): PropertyField[] {
     const { properties } = schema;
     const propertyKeys = Object.keys(properties);
-    const state: JsonSchemaPropertyInputField[] = [];
+    const state: PropertyField[] = [];
     propertyKeys.forEach((key) => {
       const property = properties[key];
       state.push({
@@ -15,4 +15,16 @@ export function getJsonSchemaPropertyInputFields(
       });
     });
     return state;
+}
+
+
+export function getType(type: string): string {
+  switch (type) {
+    case "string":
+      return "text";
+    case "integer":
+      return "number";
+    default:
+      return type;
+  }
 }

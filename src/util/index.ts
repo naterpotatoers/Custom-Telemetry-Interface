@@ -1,1 +1,1 @@
-export { getJsonSchemaPropertyInputFields } from "./mutators";
+export { getPropertyFields } from "./mutators";

@@ -1,5 +1,5 @@
 export type {
-  JsonSchema,
-  JsonSchemaProperty,
-  JsonSchemaPropertyInputField,
+  Schema,
+  SchemaProperty,
+  PropertyField,
 } from "./JsonSchema";

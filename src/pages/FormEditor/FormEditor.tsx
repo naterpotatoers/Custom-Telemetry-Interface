@@ -1,11 +1,11 @@
-import { JsonSchema } from "../../types";
+import { Schema } from "../../types";
 import PropertyCard from "./components/PropertyCard";
 
 export default function FormEditor({
   schema,
   dispatch,
 }: {
-  schema: JsonSchema;
+  schema: Schema;
   dispatch: React.Dispatch<any>;
 }) {
   const handleNewProperty = () => {
@@ -27,7 +27,7 @@ export default function FormEditor({
       </div>
       <div>
         {Object.entries(schema.properties).map(([key, property]) => (
-          <div style={{ margin: "10px" }} key={key}>
+          <div className="card" style={{ margin: "10px" }} key={key}>
             <PropertyCard
               propertyKey={key}
               property={property}
