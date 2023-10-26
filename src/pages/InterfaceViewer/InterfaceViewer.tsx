@@ -11,7 +11,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   const handleChange = (e: any) => {
     const newData = data.map((property: PropertyField) => {
       if (property.id === e.target.name) {
-        return { ...property, default: e.target.value };
+        return { ...property, value: e.target.value };
       }
       return property;
     });
@@ -33,7 +33,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
               <input
                 type={getType(property.type)}
                 name={property.id}
-                value={property.default}
+                value={property.value}
                 onChange={handleChange}
               />
             </label>
