@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Schema } from "../../types";
 import PropertyCard from "./components/PropertyCard";
+import AddProperty from "./components/AddProperty";
 
 export default function FormEditor({
   schema,
@@ -9,23 +10,22 @@ export default function FormEditor({
   schema: Schema;
   dispatch: React.Dispatch<any>;
 }) {
-  // const [openNewPropertyDialog, setOpenNewPropertyDialog] = useState(false);
-  const handleNewProperty = () => {
-    dispatch({
-      type: "ADD_PROPERTY",
-      key: Date.now().toString(),
-      title: "",
-      dataType: "string",
-      description: "",
-      default: "",
-    });
-  };
+  const [openNewPropertyDialog, setOpenNewPropertyDialog] = useState(false);
 
   return (
     <div>
       <h1>Form Editor</h1>
+      {
+        <AddProperty
+          dispatch={dispatch}
+          openNewPropertyDialog={openNewPropertyDialog}
+          setOpenNewPropertyDialog={setOpenNewPropertyDialog}
+        />
+      }
       <div>
-        <button onClick={handleNewProperty}>Add new property</button>
+        <button onClick={() => setOpenNewPropertyDialog(true)}>
+          Add new property
+        </button>
       </div>
       <div>
         {Object.entries(schema.properties).map(([key, property]) => (
