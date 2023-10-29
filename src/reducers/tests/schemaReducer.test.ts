@@ -66,7 +66,7 @@ describe("schemaReducer", () => {
     it("should update a property field", () => {
       const firstKey = Object.keys(MOCK_SCHEMA.properties)[0];
       const action = {
-        type: "UPDATE_PROPERTY_FIELD",
+        type: "UPDATE_FIELD",
         key: firstKey,
         name: "title",
         value: "Test",
@@ -88,7 +88,7 @@ describe("schemaReducer", () => {
   it("should update a property key", () => {
     const firstKey = Object.keys(MOCK_SCHEMA.properties)[0];
     const action = {
-      type: "UPDATE_PROPERTY_KEY",
+      type: "UPDATE_KEY",
       oldKey: firstKey,
       newKey: "test",
     };

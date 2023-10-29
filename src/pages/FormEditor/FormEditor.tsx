@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Schema } from "../../types";
 import PropertyCard from "./components/PropertyCard";
 
@@ -8,9 +9,10 @@ export default function FormEditor({
   schema: Schema;
   dispatch: React.Dispatch<any>;
 }) {
+  // const [openNewPropertyDialog, setOpenNewPropertyDialog] = useState(false);
   const handleNewProperty = () => {
     dispatch({
-      type: "UPDATE_PROPERTY",
+      type: "ADD_PROPERTY",
       key: Date.now().toString(),
       title: "",
       dataType: "string",

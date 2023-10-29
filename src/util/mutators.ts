@@ -24,7 +24,11 @@ export function getType(type: string): string {
       return "text";
     case "integer":
       return "number";
+    case "number":
+      return "number";
+    case "boolean":
+      return "checkbox";
     default:
-      return type;
+      return "text";
   }
 }

@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { SchemaProperty } from "../../../types";
+import { getType } from "../../../util/mutators";
 
 export default function PropertyCard({
   propertyKey,
@@ -11,10 +12,7 @@ export default function PropertyCard({
   dispatch: React.Dispatch<any>;
 }) {
   const [key, setKey] = useState<string>(propertyKey);
-  const isNumberOrString = ["number", "integer", "string"].includes(
-    property.type
-  );
-  const MinMaxLengthSuffix = property.type === "string" ? "Length" : "Value";
+  const minMaxSuffix = property.type === "string" ? "Length" : "Value";
   const defaultType = property.type === "string" ? "text" : "number";
 
   const handleDelete = () => {
@@ -26,7 +24,7 @@ export default function PropertyCard({
 
   const handleKeyChange = () => {
     dispatch({
-      type: "UPDATE_PROPERTY_KEY",
+      type: "UPDATE_KEY",
       oldKey: propertyKey,
       newKey: key,
     });
@@ -44,19 +42,16 @@ export default function PropertyCard({
       newDefault = 0;
     }
     dispatch({
-      type: "UPDATE_PROPERTY",
+      type: "UPDATE_TYPE",
       key: propertyKey,
-      name: "type",
-      dataType: e.target.value,
+      propertyType: e.target.value,
       default: newDefault,
-      minimum: undefined,
-      maximum: undefined,
     });
   };
 
   const handlePropertyChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: "UPDATE_PROPERTY_FIELD",
+      type: "UPDATE_FIELD",
       key: propertyKey,
       name: e.target.name,
       value: e.target.value,
@@ -105,38 +100,33 @@ export default function PropertyCard({
           name="description"
         />
       </label>
-      {/* TODO: throws warning "a component is changing an uncontrolled input to be controlled" */}
       <label>
         Default
         <input
-          type={defaultType}
+          type={getType(property.type)}
           value={property.default as any}
           onChange={(e) => handlePropertyChange(e)}
           name="default"
         />
       </label>
-      {isNumberOrString && (
-        <>
-          <label>
-            Minimum {MinMaxLengthSuffix}
-            <input
-              type="number"
-              value={property.minimum}
-              onChange={(e) => handlePropertyChange(e)}
-              name="minimum"
-            />
-          </label>
-          <label>
-            Maximum {MinMaxLengthSuffix}
-            <input
-              type="number"
-              value={property.maximum}
-              onChange={(e) => handlePropertyChange(e)}
-              name="maximum"
-            />
-          </label>
-        </>
-      )}
+      <label>
+        Minimum {minMaxSuffix}
+        <input
+          type="number"
+          value={property.minimum}
+          onChange={(e) => handlePropertyChange(e)}
+          name="minimum"
+        />
+      </label>
+      <label>
+        Maximum {minMaxSuffix}
+        <input
+          type="number"
+          value={property.maximum}
+          onChange={(e) => handlePropertyChange(e)}
+          name="maximum"
+        />
+      </label>
       <button onClick={handleDelete}>Delete</button>
     </>
   );

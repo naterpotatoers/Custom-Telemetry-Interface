@@ -2,7 +2,7 @@ import { Schema } from "../types";
 
 export function schemaReducer(schema: Schema, action: any) {
   switch (action.type) {
-    case "UPDATE_PROPERTY":
+    case "ADD_PROPERTY":
       return {
         ...schema,
         properties: {
@@ -18,7 +18,20 @@ export function schemaReducer(schema: Schema, action: any) {
         },
       };
 
-    case "UPDATE_PROPERTY_FIELD":
+    case "UPDATE_TYPE":
+      return {
+        ...schema,
+        properties: {
+          ...schema.properties,
+          [action.key]: {
+            ...schema.properties[action.key],
+            type: action.propertyType,
+            default: action.default,
+          },
+        },
+      };
+
+    case "UPDATE_FIELD":
       return {
         ...schema,
         properties: {
@@ -30,7 +43,7 @@ export function schemaReducer(schema: Schema, action: any) {
         },
       };
 
-    case "UPDATE_PROPERTY_KEY":
+    case "UPDATE_KEY":
       const newProperty = { ...schema.properties };
       const newKey = action.newKey;
       const oldKey = action.oldKey;
