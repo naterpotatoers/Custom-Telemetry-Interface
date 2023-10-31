@@ -1,41 +1,49 @@
 import { useEffect, useState } from "react";
 import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
-import { getType } from "../../util/mutators";
+import { getInputType } from "../../util/mutators";
 
 export default function InterfaceViewer({ schema }: { schema: Schema }) {
-  const [data, setData] = useState<Array<PropertyField>>(
+  const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
     getPropertyFields(schema)
   );
 
   const handleChange = (e: any) => {
-    const newData = data.map((property: PropertyField) => {
+    const newData = interfaceData.map((property: PropertyField) => {
       if (property.id === e.target.name) {
         return { ...property, value: e.target.value };
       }
       return property;
     });
-    setData(newData);
+    setInterfaceData(newData);
   };
 
   useEffect(() => {
-    setData(getPropertyFields(schema));
+    setInterfaceData(getPropertyFields(schema));
   }, [schema]);
 
   return (
     <div>
       <h1>Interface Viewer</h1>
       <div>
-        {data.map((property: PropertyField) => (
+        {interfaceData.map((property: PropertyField) => (
           <div key={property.id}>
             <label>
               {property.title} - {property.type}
               <input
-                type={getType(property.type)}
+                type={getInputType(property.type)}
                 name={property.id}
                 value={property.value}
                 onChange={handleChange}
               />
+              {(property.type === "number" || property.type === "integer") && (
+                <input
+                  type="range"
+                  name={property.id}
+                  value={property.value}
+                  onChange={handleChange}
+                />
+              )}
             </label>
           </div>
         ))}

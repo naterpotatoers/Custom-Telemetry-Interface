@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SchemaProperty } from "../../../types";
-import { getType } from "../../../util/mutators";
+import { getInputType } from "../../../util/mutators";
 
 export default function AddProperty({
   dispatch,
@@ -109,7 +109,7 @@ export default function AddProperty({
       <label>
         Default
         <input
-          type={getType(data.type)}
+          type={getInputType(data.type)}
           value={data.default as any}
           onChange={handleChange}
           name="default"

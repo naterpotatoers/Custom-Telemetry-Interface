@@ -18,7 +18,7 @@ export function getPropertyFields(
 }
 
 
-export function getType(type: string): string {
+export function getInputType(type: string): string {
   switch (type) {
     case "string":
       return "text";

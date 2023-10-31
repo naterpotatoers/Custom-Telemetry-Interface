@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { SchemaProperty } from "../../../types";
-import { getType } from "../../../util/mutators";
+import { getInputType } from "../../../util/mutators";
 
 export default function PropertyCard({
   propertyKey,
@@ -103,7 +103,7 @@ export default function PropertyCard({
       <label>
         Default
         <input
-          type={getType(property.type)}
+          type={getInputType(property.type)}
           value={property.default as any}
           onChange={(e) => handlePropertyChange(e)}
           name="default"
