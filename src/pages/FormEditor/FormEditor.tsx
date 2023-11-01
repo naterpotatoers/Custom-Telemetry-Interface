@@ -27,7 +27,7 @@ export default function FormEditor({
           Add new property
         </button>
       </div>
-      <div>
+      <div className="input-container">
         {Object.entries(schema.properties).map(([key, property]) => (
           <div className="card" style={{ margin: "10px" }} key={key}>
             <PropertyCard

@@ -67,79 +67,83 @@ export default function AddProperty({
 
   return (
     <dialog open={openNewPropertyDialog}>
-      <div>
+      <div className="flex-spaced">
         <h2>Add New Property</h2>
-        <button onClick={handleClose}>Close</button>
+        <button type="button" className="close-btn" onClick={handleClose}>
+          &times;
+        </button>
       </div>
-      <label>
-        Type
-        <select value={data.type} onChange={handleChange} name="type">
-          <option value="string">String</option>
-          <option value="number">Number</option>
-          <option value="integer">Integer</option>
-        </select>
-      </label>
-      <label>
-        New Property Key
-        <input
-          type="text"
-          value={data.key}
-          onChange={handleChange}
-          name="key"
-        />
-      </label>
-      <label>
-        Title
-        <input
-          type="text"
-          value={data.title}
-          onChange={handleChange}
-          name="title"
-        />
-      </label>
-      <label>
-        Description
-        <input
-          type="text"
-          value={data.description}
-          onChange={handleChange}
-          name="description"
-        />
-      </label>
-      <label>
-        Default
-        <input
-          type={getInputType(data.type)}
-          value={data.default as any}
-          onChange={handleChange}
-          name="default"
-        />
-      </label>
-      <label>
-        Minimum {minMaxSuffix}
-        <input
-          type="number"
-          value={data.minimum}
-          onChange={handleChange}
-          name="minimum"
-        />
-      </label>
-      <label>
-        Maximum {minMaxSuffix}
-        <input
-          type="number"
-          value={data.maximum}
-          onChange={handleChange}
-          name="maximum"
-        />
-      </label>
-      <button
-        onClick={() => {
-          addNewProperty();
-        }}
-      >
-        Add Property
-      </button>
+      <div className='input-container'>
+        <label>
+          Type
+          <select value={data.type} onChange={handleChange} name="type">
+            <option value="string">String</option>
+            <option value="number">Number</option>
+            <option value="integer">Integer</option>
+          </select>
+        </label>
+        <label>
+          New Property Key
+          <input
+            type="text"
+            value={data.key}
+            onChange={handleChange}
+            name="key"
+          />
+        </label>
+        <label>
+          Title
+          <input
+            type="text"
+            value={data.title}
+            onChange={handleChange}
+            name="title"
+          />
+        </label>
+        <label>
+          Description
+          <input
+            type="text"
+            value={data.description}
+            onChange={handleChange}
+            name="description"
+          />
+        </label>
+        <label>
+          Default
+          <input
+            type={getInputType(data.type)}
+            value={data.default as any}
+            onChange={handleChange}
+            name="default"
+          />
+        </label>
+        <label>
+          Minimum {minMaxSuffix}
+          <input
+            type="number"
+            value={data.minimum}
+            onChange={handleChange}
+            name="minimum"
+          />
+        </label>
+        <label>
+          Maximum {minMaxSuffix}
+          <input
+            type="number"
+            value={data.maximum}
+            onChange={handleChange}
+            name="maximum"
+          />
+        </label>
+        <button
+          onClick={() => {
+            addNewProperty();
+          }}
+        >
+          Add Property
+        </button>
+      </div>
     </dialog>
   );
 }
