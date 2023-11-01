@@ -16,6 +16,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   const handleChange = (e: any) => {
     const newData = interfaceData.map((property: PropertyField) => {
       if (property.id === e.target.name) {
+        if(property.type === "number" || property.type === "integer") return { ...property, value: Number(e.target.value) };
         return { ...property, value: e.target.value };
       }
       return property;
@@ -46,6 +47,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
               {(property.type === "number" || property.type === "integer") && (
                 <input
                   type="range"
+                  step={property.type === "number" ? 0.1 : 1}
                   name={property.id}
                   value={property.value}
                   onChange={handleChange}
