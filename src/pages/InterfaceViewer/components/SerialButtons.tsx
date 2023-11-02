@@ -1,6 +1,13 @@
-import React, { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function SerialButtons() {
+export default function SerialButtons({
+  propertiesLength,
+  message,
+}: {
+  propertiesLength: number;
+  message: React.MutableRefObject<string>;
+}) {
+  const rawSerial = useRef("");
   const decoder = useRef(new TextDecoder("utf-8"));
   const encoder = useRef(new TextEncoder());
   const port = useRef<SerialPort>();
@@ -24,7 +31,7 @@ export default function SerialButtons() {
       }
       setIsConnected(true);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsConnected(false);
     }
   }
@@ -32,6 +39,7 @@ export default function SerialButtons() {
   function disconnect() {
     try {
       if (reader.current && writer.current && port.current) {
+        setIsConnected(false);
         reader.current.cancel();
         writer.current.abort();
         reader.current.releaseLock();
@@ -40,7 +48,6 @@ export default function SerialButtons() {
         port.current = undefined;
         reader.current = undefined;
         writer.current = undefined;
-        setIsConnected(false);
         setIsDtrModeEnabled(false);
       }
     } catch (error) {
@@ -49,44 +56,76 @@ export default function SerialButtons() {
     }
   }
 
-  async function read() {
+  async function write(data: string) {
     try {
-      if (reader.current) {
-        const { value, done } = await reader.current.read();
-        if (value) {
-          console.log(decoder.current.decode(value));
-        }
-        if (done) {
-          console.log("Read done", done);
-        }
+      if (writer.current) {
+        const encodedMessage = encoder.current.encode(data + "\n");
+        await writer.current.write(encodedMessage);
       }
     } catch (error) {
       console.error(error);
-      disconnect();
     } finally {
-      if (reader.current) reader.current.releaseLock();
-      // await port.current?.close(); // TODO: Check if this is needed
+      if (writer.current) {
+        await writer.current.abort();
+      }
     }
   }
 
-  async function write(data: string) {
+  async function toggleDTR() {
     try {
-      if (writer.current)
-        await writer.current.write(encoder.current.encode(data));
+      if (port.current) {
+        await port.current.setSignals({
+          dataTerminalReady: !isDtrModeEnabled,
+          requestToSend: !isDtrModeEnabled,
+        });
+        setIsDtrModeEnabled(!isDtrModeEnabled);
+      }
     } catch (error) {
       console.error(error);
-    } finally {
-      if (writer.current) writer.current.releaseLock();
     }
   }
+
+  async function handleReadWrite() {
+    try {
+      if (reader.current) {
+        const { value } = await reader.current.read();
+        let decoded = await new TextDecoder().decode(value);
+        rawSerial.current += await decoded;
+        console.log(decoded);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function serialParser(rawString: string): any {
+    const jsonList = rawString.split("\n").filter((command) => {
+      try {
+        return Object.keys(JSON.parse(command)).length === propertiesLength;
+      } catch (e) {
+        return false;
+      }
+    });
+    return jsonList.length > 0
+      ? JSON.parse(jsonList[jsonList.length - 1])
+      : null;
+  }
+
+  useEffect(() => {
+    handleReadWrite();
+  }, [isConnected]);
 
   return (
     <div>
+      <button onClick={toggleDTR}>
+        {isDtrModeEnabled ? "Disable DTR" : "Enable DTR"}
+      </button>
       <label>
-        Baud Rate
+        Baudrate
         <input
           type="number"
           value={baudRate}
+          id="baudrate-input"
           onChange={(e) => setBaudRate(parseInt(e.target.value))}
         />
       </label>

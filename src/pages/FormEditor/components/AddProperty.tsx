@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SchemaProperty } from "../../../types";
-import { getInputType } from "../../../util/mutators";
+import { convertSchemaTypeToInputType } from "../../../util/mutators";
 
 export default function AddProperty({
   dispatch,
@@ -67,23 +67,15 @@ export default function AddProperty({
 
   return (
     <dialog open={openNewPropertyDialog}>
-      <div className="flex-spaced">
+      <div className="flex-header">
         <h2>Add New Property</h2>
         <button type="button" className="close-btn" onClick={handleClose}>
           &times;
         </button>
       </div>
-      <div className='input-container'>
-        <label>
-          Type
-          <select value={data.type} onChange={handleChange} name="type">
-            <option value="string">String</option>
-            <option value="number">Number</option>
-            <option value="integer">Integer</option>
-          </select>
-        </label>
-        <label>
-          New Property Key
+      <div className='flex-spaced'>
+      <label className="form-input">
+          Key
           <input
             type="text"
             value={data.key}
@@ -91,7 +83,15 @@ export default function AddProperty({
             name="key"
           />
         </label>
-        <label>
+        <label className="form-input">
+          Type
+          <select value={data.type} onChange={handleChange} name="type">
+            <option value="string">String</option>
+            <option value="number">Number</option>
+            <option value="integer">Integer</option>
+          </select>
+        </label>
+        <label className="form-input">
           Title
           <input
             type="text"
@@ -100,25 +100,16 @@ export default function AddProperty({
             name="title"
           />
         </label>
-        <label>
-          Description
-          <input
-            type="text"
-            value={data.description}
-            onChange={handleChange}
-            name="description"
-          />
-        </label>
-        <label>
+        <label className="form-input">
           Default
           <input
-            type={getInputType(data.type)}
+            type={convertSchemaTypeToInputType(data.type)}
             value={data.default as any}
             onChange={handleChange}
             name="default"
           />
         </label>
-        <label>
+        <label className="form-input">
           Minimum {minMaxSuffix}
           <input
             type="number"
@@ -127,7 +118,7 @@ export default function AddProperty({
             name="minimum"
           />
         </label>
-        <label>
+        <label className="form-input">
           Maximum {minMaxSuffix}
           <input
             type="number"

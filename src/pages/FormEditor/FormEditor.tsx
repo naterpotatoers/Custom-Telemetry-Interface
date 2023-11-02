@@ -14,7 +14,6 @@ export default function FormEditor({
 
   return (
     <div>
-      <h1>Form Editor</h1>
       {
         <AddProperty
           dispatch={dispatch}
@@ -22,22 +21,24 @@ export default function FormEditor({
           setOpenNewPropertyDialog={setOpenNewPropertyDialog}
         />
       }
-      <div>
-        <button onClick={() => setOpenNewPropertyDialog(true)}>
-          Add new property
-        </button>
+      <div className="flex-header">
+        <h2>Form Editor</h2>
+
+        <div>
+          <button onClick={() => setOpenNewPropertyDialog(true)}>
+            Add Property
+          </button>
+        </div>
       </div>
-      <div className="input-container">
-        {Object.entries(schema.properties).map(([key, property]) => (
-          <div className="card" style={{ margin: "10px" }} key={key}>
-            <PropertyCard
-              propertyKey={key}
-              property={property}
-              dispatch={dispatch}
-            />
-          </div>
-        ))}
-      </div>
+      {Object.entries(schema.properties).map(([key, property]) => (
+        <div className="card" key={key}>
+          <PropertyCard
+            propertyKey={key}
+            property={property}
+            dispatch={dispatch}
+          />
+        </div>
+      ))}
     </div>
   );
 }

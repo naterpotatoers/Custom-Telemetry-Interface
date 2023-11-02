@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { SchemaProperty } from "../../../types";
-import { getInputType } from "../../../util/mutators";
+import { convertSchemaTypeToInputType } from "../../../util/mutators";
 
 export default function PropertyCard({
   propertyKey,
@@ -13,7 +13,6 @@ export default function PropertyCard({
 }) {
   const [key, setKey] = useState<string>(propertyKey);
   const minMaxSuffix = property.type === "string" ? "Length" : "Value";
-  const defaultType = property.type === "string" ? "text" : "number";
 
   const handleDelete = () => {
     dispatch({
@@ -60,74 +59,74 @@ export default function PropertyCard({
 
   return (
     <>
-      <label>
-        Type
-        <select
-          value={property.type}
-          onChange={(e) => handleTypeChange(e)}
-          name="dataType"
-        >
-          <option value="string">String</option>
-          <option value="number">Number</option>
-          <option value="integer">Integer</option>
-        </select>
-      </label>
-      <label>
-        Key
-        <input
-          type="text"
-          value={key}
-          onChange={(e) => setKey(e.target.value)}
-          onBlur={handleKeyChange}
-          name="key"
-        />
-      </label>
-      <label>
-        Title
-        <input
-          type="text"
-          value={property.title}
-          onChange={(e) => handlePropertyChange(e)}
-          name="title"
-        />
-      </label>
-      <label>
-        Description
-        <input
-          type="text"
-          value={property.description}
-          onChange={(e) => handlePropertyChange(e)}
-          name="description"
-        />
-      </label>
-      <label>
-        Default
-        <input
-          type={getInputType(property.type)}
-          value={property.default as any}
-          onChange={(e) => handlePropertyChange(e)}
-          name="default"
-        />
-      </label>
-      <label>
-        Minimum {minMaxSuffix}
-        <input
-          type="number"
-          value={property.minimum}
-          onChange={(e) => handlePropertyChange(e)}
-          name="minimum"
-        />
-      </label>
-      <label>
-        Maximum {minMaxSuffix}
-        <input
-          type="number"
-          value={property.maximum}
-          onChange={(e) => handlePropertyChange(e)}
-          name="maximum"
-        />
-      </label>
-      <button onClick={handleDelete}>Delete</button>
+      <div className="flex-header">
+        <h2>{property.title}</h2>
+        <button type="button" className="close-btn" onClick={handleDelete}>
+          &times;
+        </button>
+      </div>
+      <div className="grid-col-3">
+        <label className="form-input">
+          Key
+          <input
+            type="text"
+            value={key}
+            onChange={(e) => setKey(e.target.value)}
+            onBlur={handleKeyChange}
+            name="key"
+          />
+        </label>
+        <label className="form-input">
+          Title
+          <input
+            type="text"
+            value={property.title}
+            onChange={(e) => handlePropertyChange(e)}
+            name="title"
+          />
+        </label>
+        <label className="form-input">
+          Type
+          <select
+            value={property.type}
+            onChange={(e) => handleTypeChange(e)}
+            name="dataType"
+          >
+            <option value="string">String</option>
+            <option value="number">Number</option>
+            <option value="integer">Integer</option>
+          </select>
+        </label>
+      </div>
+      <div className="grid-col-3">
+        <label className="form-input">
+          Default
+          <input
+            type={convertSchemaTypeToInputType(property.type)}
+            value={property.default as any}
+            onChange={(e) => handlePropertyChange(e)}
+            name="default"
+          />
+        </label>
+        <label className="form-input">
+          Minimum {minMaxSuffix}
+          <input
+            type="number"
+            value={property.minimum}
+            onChange={(e) => handlePropertyChange(e)}
+            name="minimum"
+          />
+        </label>
+        <label className="form-input">
+          Maximum {minMaxSuffix}
+          <input
+            type="number"
+            value={property.maximum}
+            onChange={(e) => handlePropertyChange(e)}
+            name="maximum"
+          />
+        </label>
+      </div>
     </>
   );
 }

@@ -22,18 +22,8 @@
     --border-radius: 5px;
 }
 
-@font-face {
-    font-family: 'VT323';
-    src: url(third_party/google_fonts/VT323/VT323-Regular.ttf);
-}
-
-@font-face {
-    font-family: 'Press Start 2P';
-    src: url(third_party/google_fonts/Press_Start_2P/PressStart2P-Regular.ttf);
-}
-
 * {
-    font-family: 'VT323', monospace;
+    font-family: monospace;
     font-size: 1.05rem;
 }
 
@@ -42,32 +32,20 @@ html {
 }
 
 body {
-    margin: 0;
+    margin: .25rem;
     background-color: black;
-    padding: 0 var(--padding);
 }
 
-nav {
-    color: var(--secondary);
-    border-bottom: 1px solid var(--primary);
-}
-
-h1 {
-    font-size: 1.2rem;
-    color: var(--accent);
-    text-shadow: 1px 1px 2px black, 0 0 1em var(--accent), 0 0 0.2em var(--accent);
-    font-family: 'Press Start 2P', monospace;
-}
-
-h1 sub {
-    font-size: 0.60rem;
+h1,
+h2 {
+    font-size: 1.4rem;
     color: var(--accent);
     text-shadow: 1px 1px 2px black, 0 0 1em var(--accent), 0 0 0.2em var(--accent);
     font-family: 'Press Start 2P', monospace;
 }
 
 h2 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 h3 {
@@ -89,11 +67,6 @@ button:hover {
     box-shadow: 0 2px 1px 0 var(--accent), 0 2.5rem 5rem 0 rgba(255, 255, 255, 0.1) !important;
 }
 
-input[type="checkbox"]:not(:disabled):hover {
-    cursor: pointer;
-    box-shadow: 0 0px 5px 0 var(--accent), 0 2.5rem 5rem 0 rgba(255, 255, 255, 0.1) !important;
-}
-
 input,
 select,
 .custom-dropdown-input-selector>label {
@@ -110,13 +83,27 @@ input:focus {
 }
 
 dialog {
+    background: black;
     border: none;
     border-radius: var(--border-radius);
     box-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;
+    width: 70vw;
 }
 
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.6);
+.dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+    margin: var(--padding);
+}
+
+.grid-col-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1rem;
 }
 
 .custom-dropdown-input-selector {
@@ -133,12 +120,18 @@ dialog::backdrop {
     outline: none;
 }
 
+.flex-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 var(--padding);
+}
+
 .close-btn {
-    right: 0;
     margin: 0;
     box-shadow: none;
     font-size: 1.5rem;
-    position: absolute;
 }
 
 .close-btn:hover {
@@ -146,47 +139,14 @@ dialog::backdrop {
     box-shadow: none !important;
 }
 
-.flex-spaced {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.flex-spaced>*,
-.btn-group>* {
-    margin: .25rem;
+.card {
+    background: none;
+    margin: var(--padding);
+    padding: var(--padding);
+    border-radius: var(--border-radius);
+    box-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;
 }
 
 #baudrate-input {
     width: 10ch;
-}
-
-#serial-input {
-    flex-grow: 1;
-}
-
-#connect-btn {
-    color: var(--accent);
-}
-
-#terminal {
-    height: 78vh;
-    margin: 0 var(--padding);
-}
-
-.input-container {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-}
-
-label>input {
-    margin-right: 0.5rem;
-    width: 100%;
-}
-
-label>select {
-    margin-right: 0.5rem;
-    width: 100%;
-}
+  }

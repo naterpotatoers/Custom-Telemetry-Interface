@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
-import { getInputType } from "../../util/mutators";
+import { convertSchemaTypeToInputType } from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
 
 export default function InterfaceViewer({ schema }: { schema: Schema }) {
   const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
     getPropertyFields(schema)
+  );
+
+  const message = useRef<string>(
+    JSON.stringify({ throttle: 0, pitch: 0, roll: 0, yaw: 0 })
   );
 
   const output = interfaceData.reduce((acc: any, property: PropertyField) => {
@@ -16,7 +20,8 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   const handleChange = (e: any) => {
     const newData = interfaceData.map((property: PropertyField) => {
       if (property.id === e.target.name) {
-        if(property.type === "number" || property.type === "integer") return { ...property, value: Number(e.target.value) };
+        if (property.type === "number" || property.type === "integer")
+          return { ...property, value: Number(e.target.value) };
         return { ...property, value: e.target.value };
       }
       return property;
@@ -28,18 +33,26 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
     setInterfaceData(getPropertyFields(schema));
   }, [schema]);
 
+  useEffect(() => {
+    message.current = JSON.stringify(output);
+  }, [output]);
+
   return (
     <div>
-      <h1>Interface Viewer</h1>
-      <SerialButtons />
-      <pre>Output: {JSON.stringify(output)}</pre>
-      <div className="input-container">
+      <div className="flex-header">
+        <h2>Interface Viewer</h2>
+        <SerialButtons
+          propertiesLength={Object.keys(schema.properties).length}
+          message={message}
+        />
+      </div>
+      <div className="flex-spaced">
         {interfaceData.map((property: PropertyField) => (
           <div key={property.id}>
-            <label>
+            <label className="form-input">
               {property.title}
               <input
-                type={getInputType(property.type)}
+                type={convertSchemaTypeToInputType(property.type)}
                 name={property.id}
                 value={property.value}
                 onChange={handleChange}
@@ -57,6 +70,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
           </div>
         ))}
       </div>
+      <pre>Output: {JSON.stringify(output)}</pre>
     </div>
   );
 }

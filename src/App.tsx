@@ -9,7 +9,8 @@ function App() {
 
   return (
     <div>
-      <FormEditor schema={schema} dispatch={dispatch} />
+      <h1>Custom Telemetry Controller</h1>
+      {/* <FormEditor schema={schema} dispatch={dispatch} /> */}
       <InterfaceViewer schema={schema} />
     </div>
   );
