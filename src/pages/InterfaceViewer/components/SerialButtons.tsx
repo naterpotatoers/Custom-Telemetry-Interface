@@ -1,12 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function SerialButtons({
-  propertiesLength,
-  message,
-}: {
-  propertiesLength: number;
-  message: React.MutableRefObject<string>;
-}) {
+export default function SerialButtons({ propertiesLength, message }) {
   const rawSerial = useRef("");
   const decoder = useRef(new TextDecoder("utf-8"));
   const encoder = useRef(new TextEncoder());
@@ -15,7 +9,7 @@ export default function SerialButtons({
   const writer = useRef<WritableStreamDefaultWriter>();
   const [isConnected, setIsConnected] = useState(false);
   const [isDtrModeEnabled, setIsDtrModeEnabled] = useState(false);
-  const [baudRate, setBaudRate] = useState(9600);
+  const [baudRate, setBaudRate] = useState(38400);
 
   async function connect() {
     try {
@@ -56,6 +50,19 @@ export default function SerialButtons({
     }
   }
 
+  async function read() {
+    try {
+      if (reader.current) {
+        const { value } = await reader.current.read();
+        let decoded = await decoder.current.decode(value);
+        rawSerial.current += await decoded;
+        console.log(decoded);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async function write(data: string) {
     try {
       if (writer.current) {
@@ -85,34 +92,13 @@ export default function SerialButtons({
     }
   }
 
-  async function handleReadWrite() {
-    try {
-      if (reader.current) {
-        const { value } = await reader.current.read();
-        let decoded = await new TextDecoder().decode(value);
-        rawSerial.current += await decoded;
-        console.log(decoded);
-      }
-    } catch (error) {
-      console.error(error);
+  async function infiniteRead() {
+    while (isConnected && reader.current) {
     }
   }
 
-  function serialParser(rawString: string): any {
-    const jsonList = rawString.split("\n").filter((command) => {
-      try {
-        return Object.keys(JSON.parse(command)).length === propertiesLength;
-      } catch (e) {
-        return false;
-      }
-    });
-    return jsonList.length > 0
-      ? JSON.parse(jsonList[jsonList.length - 1])
-      : null;
-  }
-
   useEffect(() => {
-    handleReadWrite();
+    infiniteRead();
   }, [isConnected]);
 
   return (

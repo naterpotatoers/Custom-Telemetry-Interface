@@ -6,7 +6,7 @@ import { schemaReducer } from "./reducers";
 
 function App() {
   const [display, setDisplay] = useState({
-    formEditor: true,
+    formEditor: false,
     interfaceViewer: true,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
