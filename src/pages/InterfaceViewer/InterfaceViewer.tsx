@@ -5,6 +5,7 @@ import { convertSchemaTypeToInputType } from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
 
 export default function InterfaceViewer({ schema }: { schema: Schema }) {
+  const [status, setStatus] = useState<string>("");
   const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
     getPropertyFields(schema)
   );
@@ -41,10 +42,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
     <div>
       <div className="flex-header">
         <h2>Interface Viewer</h2>
-        <SerialButtons
-          propertiesLength={Object.keys(schema.properties).length}
-          message={message}
-        />
+        <SerialButtons setStatus={setStatus} message={message} />
       </div>
       <div className="flex-spaced">
         {interfaceData.map((property: PropertyField) => (
@@ -70,7 +68,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
           </div>
         ))}
       </div>
-      <pre>Output: {JSON.stringify(output)}</pre>
+      <pre>Output: {status}</pre>
     </div>
   );
 }

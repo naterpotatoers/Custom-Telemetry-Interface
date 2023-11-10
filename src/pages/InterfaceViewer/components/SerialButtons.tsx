@@ -1,15 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function SerialButtons({ propertiesLength, message }) {
-  const rawSerial = useRef("");
-  const decoder = useRef(new TextDecoder("utf-8"));
-  const encoder = useRef(new TextEncoder());
+export default function SerialButtons({
+  setStatus,
+  message,
+}: {
+  setStatus: React.Dispatch<React.SetStateAction<any>>;
+  message: React.MutableRefObject<string>;
+}) {
   const port = useRef<SerialPort>();
+  const decoder = useRef(new TextDecoder("utf-8"));
   const reader = useRef<ReadableStreamDefaultReader>();
   const writer = useRef<WritableStreamDefaultWriter>();
+  const [baudRate, setBaudRate] = useState(38400);
   const [isConnected, setIsConnected] = useState(false);
   const [isDtrModeEnabled, setIsDtrModeEnabled] = useState(false);
-  const [baudRate, setBaudRate] = useState(38400);
 
   async function connect() {
     try {
@@ -50,34 +54,6 @@ export default function SerialButtons({ propertiesLength, message }) {
     }
   }
 
-  async function read() {
-    try {
-      if (reader.current) {
-        const { value } = await reader.current.read();
-        let decoded = await decoder.current.decode(value);
-        rawSerial.current += await decoded;
-        console.log(decoded);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function write(data: string) {
-    try {
-      if (writer.current) {
-        const encodedMessage = encoder.current.encode(data + "\n");
-        await writer.current.write(encodedMessage);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      if (writer.current) {
-        await writer.current.abort();
-      }
-    }
-  }
-
   async function toggleDTR() {
     try {
       if (port.current) {
@@ -92,13 +68,17 @@ export default function SerialButtons({ propertiesLength, message }) {
     }
   }
 
-  async function infiniteRead() {
+  async function handleReadWrite() {
     while (isConnected && reader.current) {
+      const { value } = await reader.current.read();
+      let decoded = await decoder.current.decode(value);
+      console.log(decoded);
+      setStatus(decoded);
     }
   }
 
   useEffect(() => {
-    infiniteRead();
+    handleReadWrite();
   }, [isConnected]);
 
   return (
