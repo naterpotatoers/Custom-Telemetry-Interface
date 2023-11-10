@@ -3,6 +3,7 @@ import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
 import { convertSchemaTypeToInputType } from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
+import TerminalInterface from "./components/TerminalInterface";
 
 export default function InterfaceViewer({ schema }: { schema: Schema }) {
   const [status, setStatus] = useState<string>("");
