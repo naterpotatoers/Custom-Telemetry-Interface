@@ -68,7 +68,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
           </div>
         ))}
       </div>
-      <pre>Output: {status}</pre>
+      <pre>Response: {status}</pre>
     </div>
   );
 }
