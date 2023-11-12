@@ -13,7 +13,7 @@ export default function FormEditor({
   const [openNewPropertyDialog, setOpenNewPropertyDialog] = useState(false);
 
   return (
-    <div>
+    <div className="section">
       {
         <AddProperty
           dispatch={dispatch}

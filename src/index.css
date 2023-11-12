@@ -90,8 +90,13 @@ dialog {
     width: 70vw;
 }
 
-.dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
+dialog::backdrop {
+    background: black;
+}
+
+.section{
+    margin: var(--padding);
+    padding: var(--padding);
 }
 
 .form-input {

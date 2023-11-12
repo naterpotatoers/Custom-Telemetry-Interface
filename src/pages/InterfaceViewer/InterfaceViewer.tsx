@@ -40,7 +40,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   }, [output]);
 
   return (
-    <div>
+    <div className="section">
       <div className="flex-header">
         <h2>Interface Viewer</h2>
         <SerialButtons setStatus={setStatus} message={message} />
@@ -69,6 +69,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
           </div>
         ))}
       </div>
+      <pre>Message: {message.current}</pre>
       <pre>Response: {status}</pre>
     </div>
   );

@@ -30,21 +30,10 @@ export default function PropertyCard({
   };
 
   const handleTypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    let newDefault = property.default;
-    if (e.target.value === "string") {
-      newDefault = "";
-    }
-    if (e.target.value === "number") {
-      newDefault = 0;
-    }
-    if (e.target.value === "integer") {
-      newDefault = 0;
-    }
     dispatch({
       type: "UPDATE_TYPE",
       key: propertyKey,
       propertyType: e.target.value,
-      default: newDefault,
     });
   };
 

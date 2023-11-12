@@ -19,6 +19,18 @@ export function schemaReducer(schema: Schema, action: any) {
       };
 
     case "UPDATE_TYPE":
+      let newDefault: any = "";
+      switch (action.propertyType) {
+        case "number" || "integer" || "float":
+          newDefault = 0;
+          break;
+        case "boolean":
+          newDefault = false;
+          break;
+        default:
+          newDefault = "S";
+          break;
+      }
       return {
         ...schema,
         properties: {
@@ -26,7 +38,7 @@ export function schemaReducer(schema: Schema, action: any) {
           [action.key]: {
             ...schema.properties[action.key],
             type: action.propertyType,
-            default: action.default,
+            default: newDefault,
           },
         },
       };
