@@ -28,7 +28,7 @@ export function schemaReducer(schema: Schema, action: any) {
           newDefault = false;
           break;
         default:
-          newDefault = "S";
+          newDefault = "";
           break;
       }
       return {

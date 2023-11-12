@@ -1,15 +1,21 @@
-import { useReducer, useState } from "react";
+import { useReducer, useRef, useState } from "react";
 import FormEditor from "./pages/FormEditor/FormEditor";
 import InterfaceViewer from "./pages/InterfaceViewer/InterfaceViewer";
 import { MOCK_SCHEMA } from "./mocks";
 import { schemaReducer } from "./reducers";
+import MessageEditor from "./pages/MessageEditor/MessageEditor";
 
 function App() {
   const [display, setDisplay] = useState({
+    messageEditor: false,
     formEditor: false,
     interfaceViewer: true,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
+  const message = useRef({
+    format: "",
+    data: JSON.stringify({ throttle: 0, pitch: 0, roll: 0, yaw: 0 }),
+  });
 
   return (
     <div>
@@ -39,8 +45,11 @@ function App() {
           </button>
         </div>
       </div>
+      {display.messageEditor && <MessageEditor schema={schema} />}
       {display.formEditor && <FormEditor schema={schema} dispatch={dispatch} />}
-      {display.interfaceViewer && <InterfaceViewer schema={schema} />}
+      {display.interfaceViewer && (
+        <InterfaceViewer schema={schema} message={message} />
+      )}
     </div>
   );
 }

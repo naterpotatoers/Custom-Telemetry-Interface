@@ -1,18 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { Schema, PropertyField } from "../../types";
+import { useEffect, useState } from "react";
+import { Schema, PropertyField, Message } from "../../types";
 import { getPropertyFields } from "../../util";
 import { convertSchemaTypeToInputType } from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
-import TerminalInterface from "./components/TerminalInterface";
 
-export default function InterfaceViewer({ schema }: { schema: Schema }) {
+export default function InterfaceViewer({
+  schema,
+  message,
+}: {
+  schema: Schema;
+  message: React.MutableRefObject<Message>;
+}) {
   const [status, setStatus] = useState<string>("");
   const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
     getPropertyFields(schema)
-  );
-
-  const message = useRef<string>(
-    JSON.stringify({ throttle: 0, pitch: 0, roll: 0, yaw: 0 })
   );
 
   const output = interfaceData.reduce((acc: any, property: PropertyField) => {
@@ -36,7 +37,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
   }, [schema]);
 
   useEffect(() => {
-    message.current = JSON.stringify(output);
+    message.current.message = JSON.stringify(output);
   }, [output]);
 
   return (
@@ -69,7 +70,7 @@ export default function InterfaceViewer({ schema }: { schema: Schema }) {
           </div>
         ))}
       </div>
-      <pre>Message: {message.current}</pre>
+      <pre>Message: {message.current.message}</pre>
       <pre>Response: {status}</pre>
     </div>
   );
