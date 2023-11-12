@@ -39,7 +39,7 @@ it("should update the key to be 'newKey'", () => {
 });
 
   it("should update the type to be 'string'", () => {
-    const typeSelect = screen.getByLabelText("Data Type") as HTMLInputElement;
+    const typeSelect = screen.getByLabelText("Type") as HTMLInputElement;
     expect(typeSelect).toBeTruthy();
     typeSelect.value = "string";
     expect(typeSelect.value).toBe("string");
