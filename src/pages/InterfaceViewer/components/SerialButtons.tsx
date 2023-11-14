@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Message } from "../../../types";
 
 export default function SerialButtons({
   setStatus,
   message,
 }: {
   setStatus: React.Dispatch<React.SetStateAction<any>>;
-  message: React.MutableRefObject<Message>;
+  message: React.MutableRefObject<string>;
 }) {
   const port = useRef<SerialPort>();
   const decoder = useRef(new TextDecoder("utf-8"));
@@ -76,7 +75,7 @@ export default function SerialButtons({
         let decoded = await decoder.current.decode(value);
         console.log(decoded);
         await writer.current.write(
-          new TextEncoder().encode(message.current.message + "\n")
+          new TextEncoder().encode(message.current + "\n") // TODO: use formatted message
         );
         setStatus(decoded);
       }

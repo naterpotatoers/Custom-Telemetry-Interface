@@ -1,4 +1,4 @@
-import { Schema, PropertyField, Message } from "../types";
+import { Schema, PropertyField } from "../types";
 
 export function getPropertyFields(
   schema: Schema
@@ -33,15 +33,14 @@ export function convertSchemaTypeToInputType(type: string): string {
   }
 }
 
-export function getFormattedMessage(message: Message, schema: Schema): string {
-  const { format } = message;
-  const { properties } = schema;
-  const propertyKeys = Object.keys(properties);
+export function getFormattedMessage(format: string, data: Array<PropertyField>): string {
+  const keys = Object.keys(data);
   let formattedMessage = format;
-  propertyKeys.forEach((key) => {
-    const property = properties[key];
-    const regex = new RegExp(`\\$\\{${key}\\}`, "g");
-    formattedMessage = formattedMessage.replace(regex, property.default.toString());
+  keys.forEach((key) => {
+    const value = data[key].value;
+    const regex = new RegExp(`{${key}}`, "g");
+    formattedMessage = formattedMessage.replace(regex, value);
   });
-  return formattedMessage; 
+  console.log(formattedMessage);
+  return formattedMessage;
 }

@@ -3,20 +3,17 @@ import FormEditor from "./pages/FormEditor/FormEditor";
 import InterfaceViewer from "./pages/InterfaceViewer/InterfaceViewer";
 import { MOCK_SCHEMA } from "./mocks";
 import { schemaReducer } from "./reducers";
-import MessageEditor from "./pages/MessageEditor/MessageEditor";
-import { Message } from "./types";
+import MessageFormatEditor from "./pages/MessageFormatEditor/MessageFormatEditor";
 
 function App() {
   const [display, setDisplay] = useState({
-    messageEditor: true,
+    MessageFormatEditor: true,
     formEditor: false,
     interfaceViewer: true,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
-  const message = useRef<Message>({
-    format: "throt: ${throttle}, pitch: ${pitch}, rollee: ${roll}, yaw: ${yaw}",
-    message: JSON.stringify({ throttle: 0, pitch: 0, roll: 0, yaw: 0 }),
-  });
+  const [messageFormat, setMessageFormat] = useState<string>('{"throttle_custom": (throttle), "pitch_format": (pitch), "roll_test": (roll), "yaw_example": (yaw)}');
+  const message = useRef<string>("");
 
   return (
     <div>
@@ -46,12 +43,20 @@ function App() {
           </button>
         </div>
       </div>
-      {display.messageEditor && (
-        <MessageEditor schema={schema} message={message} />
+      {display.MessageFormatEditor && (
+        <MessageFormatEditor
+          schema={schema}
+          messageFormat={messageFormat}
+          setMessageFormat={setMessageFormat}
+        />
       )}
       {display.formEditor && <FormEditor schema={schema} dispatch={dispatch} />}
       {display.interfaceViewer && (
-        <InterfaceViewer schema={schema} message={message} />
+        <InterfaceViewer
+          schema={schema}
+          message={message}
+          messageFormat={messageFormat}
+        />
       )}
     </div>
   );

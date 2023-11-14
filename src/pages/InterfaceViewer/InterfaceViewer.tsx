@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import { Schema, PropertyField, Message } from "../../types";
+import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
-import { convertSchemaTypeToInputType } from "../../util/mutators";
+import {
+  convertSchemaTypeToInputType,
+  getFormattedMessage,
+} from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
 
 export default function InterfaceViewer({
   schema,
   message,
+  messageFormat,
 }: {
   schema: Schema;
-  message: React.MutableRefObject<Message>;
+  message: React.MutableRefObject<string>;
+  messageFormat: string;
 }) {
   const [status, setStatus] = useState<string>("");
   const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
@@ -37,8 +42,10 @@ export default function InterfaceViewer({
   }, [schema]);
 
   useEffect(() => {
-    message.current.message = JSON.stringify(output);
+    message.current = getFormattedMessage(messageFormat, output);
   }, [output]);
+
+  const test = getFormattedMessage(messageFormat, output);
 
   return (
     <div className="section">
@@ -70,7 +77,7 @@ export default function InterfaceViewer({
           </div>
         ))}
       </div>
-      <pre>Message: {message.current.message}</pre>
+      <pre>Message Format: {test}</pre>
       <pre>Response: {status}</pre>
     </div>
   );
