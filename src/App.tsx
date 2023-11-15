@@ -4,10 +4,11 @@ import InterfaceViewer from "./pages/InterfaceViewer/InterfaceViewer";
 import { MOCK_SCHEMA } from "./mocks";
 import { schemaReducer } from "./reducers";
 import MessageFormatEditor from "./pages/MessageFormatEditor/MessageFormatEditor";
+import Navbar from "./pages/Navbar/Navbar";
 
 function App() {
   const [display, setDisplay] = useState({
-    MessageFormatEditor: true,
+    MessageFormatEditor: false,
     formEditor: false,
     interfaceViewer: true,
   });
@@ -19,32 +20,7 @@ function App() {
 
   return (
     <div>
-      <div className="flex-header">
-        <h1>Custom Telemetry Controller</h1>
-        <div>
-          <button
-            name="formEditor"
-            onClick={() =>
-              setDisplay({
-                ...display,
-                formEditor: !display.formEditor,
-              })
-            }
-          >
-            Toggle Form Editor
-          </button>
-          <button
-            onClick={() =>
-              setDisplay({
-                ...display,
-                interfaceViewer: !display.interfaceViewer,
-              })
-            }
-          >
-            Toggle Interface Viewer
-          </button>
-        </div>
-      </div>
+      <Navbar display={display} setDisplay={setDisplay} />
       {display.MessageFormatEditor && (
         <MessageFormatEditor
           schema={schema}

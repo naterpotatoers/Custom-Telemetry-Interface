@@ -13,7 +13,7 @@ export default function MessageFormatEditor({
     <div className="section">
       <div className="flex-header">
         <h2>Message Format Editor</h2>
-        Keys: {Object.keys(schema.properties).join(",")}
+        Keys: {Object.keys(schema.properties).join(", ")}
       </div>
       <div>
         <label className="form-input">
@@ -23,6 +23,7 @@ export default function MessageFormatEditor({
             value={messageFormat}
             onChange={(e) => setMessageFormat(e.target.value)}
           />
+          <sub>Wrap keys in $() to use in message format e.g. $(key)</sub>
         </label>
       </div>
     </div>

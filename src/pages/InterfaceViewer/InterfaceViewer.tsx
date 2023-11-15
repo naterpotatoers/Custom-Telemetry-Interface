@@ -44,8 +44,8 @@ export default function InterfaceViewer({
   useEffect(() => {
     message.current = getFormattedMessage(messageFormat, output);
   }, [output]);
-
-  const test = getFormattedMessage(messageFormat, output);
+  
+  const formattedMessage = getFormattedMessage(messageFormat, interfaceData);
 
   return (
     <div className="section">
@@ -77,7 +77,7 @@ export default function InterfaceViewer({
           </div>
         ))}
       </div>
-      <pre>Message Format: {test}</pre>
+      <pre>Message Format: {formattedMessage}</pre>
       <pre>Response: {status}</pre>
     </div>
   );

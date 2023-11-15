@@ -86,12 +86,15 @@ dialog {
     background: black;
     border: none;
     border-radius: var(--border-radius);
-    box-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;
-    width: 70vw;
+    box-shadow: 1px 1px 2px black, 0 0 1em var(--accent), 0 0 0.2em var(--accent);
+    width: 90vw;
+    position: fixed;
 }
 
+/* TODO: Make this actually work */
 dialog::backdrop {
-    background: black;
+    background: black !important;
+    opacity: 0.5;
 }
 
 .section{
