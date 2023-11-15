@@ -12,7 +12,9 @@ function App() {
     interfaceViewer: true,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
-  const [messageFormat, setMessageFormat] = useState<string>('{"throttle_custom": (throttle), "pitch_format": (pitch), "roll_test": (roll), "yaw_example": (yaw)}');
+  const [messageFormat, setMessageFormat] = useState<string>(
+    '{"throttle_custom": $(throttle), "pitch_format": $(pitch), "roll_test": $(roll), "yaw_example": $(yaw)}'
+  );
   const message = useRef<string>("");
 
   return (

@@ -9,7 +9,7 @@ describe("mutator", () => {
   });
 
   it("should return a string in the correctly formatted structure", () => {
-    const format = "pitch ${pitch} and roll ${roll}";
+    const format = "pitch $(pitch) and roll $(roll)";
     const formattedMessage = getFormattedMessage(format, MOCK_SCHEMA_STATE);
     expect(formattedMessage).toEqual("pitch 0 and roll 0");
   });
