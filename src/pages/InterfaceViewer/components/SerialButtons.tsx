@@ -91,9 +91,6 @@ export default function SerialButtons({
 
   return (
     <div>
-      <button onClick={toggleDTR}>
-        {isDtrModeEnabled ? "Disable DTR" : "Enable DTR"}
-      </button>
       <label>
         Baudrate
         <input
@@ -103,6 +100,9 @@ export default function SerialButtons({
           onChange={(e) => setBaudRate(parseInt(e.target.value))}
         />
       </label>
+      <button onClick={toggleDTR}>
+        {isDtrModeEnabled ? "Disable DTR" : "Enable DTR"}
+      </button>
       <button onClick={isConnected ? disconnect : connect}>
         {isConnected ? "Disconnect" : "Connect"}
       </button>

@@ -6,6 +6,7 @@ import {
   getFormattedMessage,
 } from "../../util/mutators";
 import SerialButtons from "./components/SerialButtons";
+import WifiButtons from "./components/WifiButtons";
 
 export default function InterfaceViewer({
   schema,
@@ -44,14 +45,17 @@ export default function InterfaceViewer({
   useEffect(() => {
     message.current = getFormattedMessage(messageFormat, output);
   }, [output]);
-  
+
   const formattedMessage = getFormattedMessage(messageFormat, interfaceData);
 
   return (
     <div className="section">
       <div className="flex-header">
         <h2>Interface Viewer</h2>
-        <SerialButtons setStatus={setStatus} message={message} />
+        <div>
+          <SerialButtons setStatus={setStatus} message={message} />
+          <WifiButtons setStatus={setStatus} message={message} />
+        </div>
       </div>
       <div className="flex-spaced">
         {interfaceData.map((property: PropertyField) => (
