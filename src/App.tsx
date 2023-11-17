@@ -5,12 +5,14 @@ import { MOCK_SCHEMA } from "./mocks";
 import { schemaReducer } from "./reducers";
 import MessageFormatEditor from "./pages/MessageFormatEditor/MessageFormatEditor";
 import Navbar from "./pages/Navbar/Navbar";
+import GamepadEditor from "./pages/GamepadEditor/GamepadEditor";
 
 function App() {
   const [display, setDisplay] = useState({
-    MessageFormatEditor: false,
+    messageFormatEditor: false,
     formEditor: false,
-    interfaceViewer: true,
+    interfaceViewer: false,
+    gamepadEditor: true,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
   const [messageFormat, setMessageFormat] = useState<string>(
@@ -21,7 +23,8 @@ function App() {
   return (
     <div>
       <Navbar display={display} setDisplay={setDisplay} />
-      {display.MessageFormatEditor && (
+      {display.gamepadEditor && <GamepadEditor schema={schema} />}
+      {display.messageFormatEditor && (
         <MessageFormatEditor
           schema={schema}
           messageFormat={messageFormat}

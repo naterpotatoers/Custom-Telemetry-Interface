@@ -5,15 +5,17 @@ export default function Navbar({
   setDisplay,
 }: {
   display: {
-    MessageFormatEditor: boolean;
+    messageFormatEditor: boolean;
     formEditor: boolean;
     interfaceViewer: boolean;
+    gamepadEditor: boolean;
   };
   setDisplay: React.Dispatch<
     React.SetStateAction<{
-      MessageFormatEditor: boolean;
+      messageFormatEditor: boolean;
       formEditor: boolean;
       interfaceViewer: boolean;
+      gamepadEditor: boolean;
     }>
   >;
 }) {
@@ -22,11 +24,11 @@ export default function Navbar({
       <h1>Custom Telemetry Controller</h1>
       <div>
         <button
-          name="MessageFormatEditor"
+          name="messageFormatEditor"
           onClick={() =>
             setDisplay({
               ...display,
-              MessageFormatEditor: !display.MessageFormatEditor,
+              messageFormatEditor: !display.messageFormatEditor,
             })
           }
         >
