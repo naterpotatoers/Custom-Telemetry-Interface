@@ -4,12 +4,9 @@ export default function BaudRate() {
   const [baudRate, setBaudRate] = useState<number>(9600);
   const [customBaudRate, setCustomBaudRate] = useState<number>(9600);
 
-  function handleBaudRateChange(e: ChangeEvent<HTMLSelectElement>) {
-    setBaudRate(parseInt(e.target.value));
-  }
-
   function handleCustomBaudRateChange(e: ChangeEvent<HTMLInputElement>) {
     setCustomBaudRate(parseInt(e.target.value));
+    setBaudRate(parseInt(e.target.value));
   }
 
   return (

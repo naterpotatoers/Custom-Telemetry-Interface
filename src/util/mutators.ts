@@ -37,9 +37,10 @@ export function getFormattedMessage(
   const keys = Object.keys(data);
   let formattedMessage = format;
   keys.forEach((key) => {
-    const property = data[key];
+    const property = data[key as any];
     const regex = new RegExp(`\\$\\(${property.id}\\)`, "g"); 
-    formattedMessage = formattedMessage.replace(regex, property.value);
+    const propertyValue = property.value as string;
+    formattedMessage = formattedMessage.replace(regex, propertyValue);
   });
   return formattedMessage;
 }
