@@ -35,10 +35,8 @@ export function HorizontalLinearGauge({
     height: 5,
   };
 
-  const r = 20;
   const strokeWidth = 4;
   const gaugeColor = gauge;
-  const textColor = color;
 
   const map = (value: number, min: number, max: number) => {
     value = (value - min) / (max - min);
@@ -58,7 +56,6 @@ export function HorizontalLinearGauge({
     x: percentEnd * viewport.width,
     y: viewport.height / 2,
   };
-  const ccwFlag = percentStart < percentEnd ? 1 : 0;
 
   return (
     <Widget title={title}>
@@ -106,10 +103,8 @@ export function VerticalLinearGauge({
     height: 48,
   };
 
-  const r = 20;
   const strokeWidth = 4;
   const gaugeColor = gauge;
-  const textColor = color;
 
   const map = (value: number, min: number, max: number) => {
     value = (value - min) / (max - min);
