@@ -8,9 +8,7 @@ export default function WifiButtons({
   message: React.MutableRefObject<string>;
 }) {
   const [isConnected, setIsConnected] = useState(false);
-  const [serverAddress, setServerAddress] = useState(
-    "http://localhost:5000"
-  );
+  const [serverAddress, setServerAddress] = useState("http://localhost:5000/");
 
   function connect() {
     setIsConnected(true);
@@ -29,7 +27,7 @@ export default function WifiButtons({
         });
         const response = await responseStatus.text();
         console.log(response);
-        // setStatus(response);
+        setStatus(response);
       } catch (error) {
         console.log(error);
         disconnect();
@@ -38,10 +36,27 @@ export default function WifiButtons({
     }
   }
 
+  async function readStatus() {
+    if (isConnected) {
+      try {
+        const responseStatus = await fetch(serverAddress, {
+          method: "GET",
+        });
+        const response = await responseStatus.json();
+        console.log(response);
+        setStatus(response);
+      } catch (error) {
+        console.log(error);
+        disconnect();
+        setStatus("Unable to GET status, verify backend is running");
+      }
+    }
+  }
+
   useEffect(() => {
     const writeInterval = setInterval(() => {
       if (isConnected) {
-        writeMessage();
+        readStatus();
       }
     }, 200);
     return () => clearInterval(writeInterval);

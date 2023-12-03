@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
+import { MOCK_RESPONSE } from "../../mocks";
 import {
   convertSchemaTypeToInputType,
   getFormattedMessage,
@@ -44,6 +45,7 @@ export default function InterfaceViewer({
 
   useEffect(() => {
     message.current = getFormattedMessage(messageFormat, output);
+    message.current = JSON.stringify(MOCK_RESPONSE);
   }, [output]);
 
   const formattedMessage = getFormattedMessage(messageFormat, interfaceData);
@@ -82,7 +84,7 @@ export default function InterfaceViewer({
         ))}
       </div>
       <pre>Message Format: {formattedMessage}</pre>
-      <pre>Response: {status}</pre>
+      <pre>Response: {JSON.stringify(status, null, 2)}</pre>
     </div>
   );
 }

@@ -6,13 +6,14 @@ import { schemaReducer } from "./reducers";
 import MessageFormatEditor from "./pages/MessageFormatEditor/MessageFormatEditor";
 import Navbar from "./pages/Navbar/Navbar";
 import GamepadEditor from "./pages/GamepadEditor/GamepadEditor";
+import AstraeusInterface from "./pages/AstraeusInterface/AstraeusInterface";
 
 function App() {
   const [display, setDisplay] = useState({
     messageFormatEditor: false,
     formEditor: false,
     interfaceViewer: false,
-    gamepadEditor: true,
+    gamepadEditor: false,
   });
   const [schema, dispatch] = useReducer(schemaReducer, MOCK_SCHEMA);
   const [messageFormat, setMessageFormat] = useState<string>(
@@ -39,6 +40,7 @@ function App() {
           messageFormat={messageFormat}
         />
       )}
+      <AstraeusInterface />
     </div>
   );
 }

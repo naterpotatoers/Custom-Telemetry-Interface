@@ -6,28 +6,33 @@ const port = 5000;
 const app = express();
 const networkInterfaces = os.networkInterfaces();
 
-let message: string = "Ready";
-let status: string = "Ready";
+let command: any = {};
+let status: any = {};
 
 app.use(cors());
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  status = JSON.stringify(req.query);
   console.log("GET /");
-  res.send(message);
+  res.json(command);
 });
 
 app.post("/", (req, res) => {
-  message = req.body;
+  command = req.body;
   console.log("POST /");
-  res.send(status);
+  res.json(status);
 });
 
 app.get("/status", (req, res) => {
   console.log("GET /status");
-  res.send(status);
+  res.json(status);
+});
+
+app.post("/status", (req, res) => {
+  status = req.body;
+  console.log("POST /status");
+  res.json(command);
 });
 
 app.listen(port, () => {

@@ -11,6 +11,8 @@ void loop()
   {
     char newString[100];
     Serial.readBytesUntil('\n', newString, 100);
+    // remove \n from newString and copy to oldString
+    newString[strlen(newString) - 1] = '\0';
     strcpy(oldString, newString);
   }
   Serial.println(oldString);

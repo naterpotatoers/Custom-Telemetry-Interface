@@ -73,7 +73,7 @@ export default function SerialButtons({
       while (isConnected && reader.current && writer.current) {
         const { value } = await reader.current.read();
         let decoded = await decoder.current.decode(value);
-        console.log(decoded);
+        console.log(message.current + "\n");
         await writer.current.write(
           new TextEncoder().encode(message.current + "\n") // TODO: use formatted message
         );
