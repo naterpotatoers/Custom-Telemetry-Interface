@@ -6,6 +6,7 @@ import { getPitch, getRoll, getYaw } from "./util";
 import { VerticalLinearGauge } from "./components/LinearGauges";
 import { Widget } from "./components/Widget";
 import { ResponseMock } from "../../mocks/ResponseMock";
+import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
@@ -44,6 +45,8 @@ export default function AstraeusInterface() {
           <HalfAngleGauge value={roll} title="Pitch" max={2} />
           <HalfAngleGauge value={yaw} title="Yaw" />
         </Widget>
+
+        <PrimaryFlightDisplay roll={roll} pitch={pitch} />
 
         <VerticalLinearGauge
           value={status.imu_temperature}
