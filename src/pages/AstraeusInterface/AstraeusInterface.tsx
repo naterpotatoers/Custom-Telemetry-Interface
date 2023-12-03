@@ -7,6 +7,7 @@ import { VerticalLinearGauge } from "./components/LinearGauges";
 import { Widget } from "./components/Widget";
 import { ResponseMock } from "../../mocks/ResponseMock";
 import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
+import Map from "./components/Map";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
@@ -40,6 +41,7 @@ export default function AstraeusInterface() {
       </div>
       <div className="flex-spaced">
         <pre>Response: {JSON.stringify(status, null, 2)}</pre>
+        <Map latitude={status.gps_latitude} longitude={status.gps_longitude} />
         <Widget title="Motion">
           <HalfAngleGauge value={pitch} title="Roll" gauge={"#5EE05C"} />
           <HalfAngleGauge value={roll} title="Pitch" max={2} />
@@ -53,7 +55,7 @@ export default function AstraeusInterface() {
           title="IMU Temperature"
           max={50}
         />
-        <Widget title="Magnetometer">
+        <Widget title="Barometer">
           <VerticalLinearGauge
             max={40}
             min={10}

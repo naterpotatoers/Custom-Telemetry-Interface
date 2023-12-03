@@ -150,3 +150,8 @@ dialog::backdrop {
 #baudrate-input {
     width: 10ch;
 }
+
+#map {
+    height: 50vh;
+    width: 40vw;
+}
