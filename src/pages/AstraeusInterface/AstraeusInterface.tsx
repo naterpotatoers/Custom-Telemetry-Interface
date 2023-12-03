@@ -55,11 +55,15 @@ export default function AstraeusInterface() {
         />
         <Widget title="Magnetometer">
           <VerticalLinearGauge
+            max={40}
+            min={10}
             value={status.barometer_temperature}
             title="Temperature"
           />
           <VerticalLinearGauge
             value={status.barometer_pressure}
+            max={200000}
+            min={10000}
             title="Pressure"
           />
           <VerticalLinearGauge
