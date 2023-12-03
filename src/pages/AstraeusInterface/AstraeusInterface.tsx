@@ -8,6 +8,7 @@ import { Widget } from "./components/Widget";
 import { ResponseMock } from "../../mocks/ResponseMock";
 import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
 import Map from "./components/Map";
+import Compass from "./components/Compass";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
@@ -41,7 +42,13 @@ export default function AstraeusInterface() {
       </div>
       <div className="flex-spaced">
         <pre>Response: {JSON.stringify(status, null, 2)}</pre>
-        <Map latitude={status.gps_latitude} longitude={status.gps_longitude} />
+        <div>
+          <Map
+            latitude={status.gps_latitude}
+            longitude={status.gps_longitude}
+          />
+          <Compass heading={status.heading} />
+        </div>
         <Widget title="Motion">
           <HalfAngleGauge value={pitch} title="Roll" gauge={"#5EE05C"} />
           <HalfAngleGauge value={roll} title="Pitch" max={2} />
