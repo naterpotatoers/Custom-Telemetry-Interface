@@ -52,10 +52,11 @@ export default function AstraeusInterface() {
                 value={status.imu_temperature}
                 title="IMU"
                 max={50}
+                min={0}
               />
               <VerticalLinearGauge
                 max={40}
-                min={10}
+                min={0}
                 value={status.barometer_temperature}
                 title="Barometer"
               />
@@ -75,12 +76,14 @@ export default function AstraeusInterface() {
               <VerticalLinearGauge
                 value={status.barometer_pressure}
                 max={200000}
-                min={10000}
+                min={0}
                 title="Pressure"
               />
               <VerticalLinearGauge
                 value={status.barometer_altitude}
                 title="Altitude"
+                min={0}
+                max={300}
               />
             </div>
           </div>
