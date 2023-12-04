@@ -22,8 +22,8 @@ export function HalfAngleGauge({
   start ??= 0;
   min ??= 0;
   max ??= 1;
-  gauge ??= "#5EE05C";
-  color ??= "#FFFFFFDD";
+  gauge ??= "lime";
+  color ??= "white";
   title ??= "";
   label ??= (Math.round(value * 10) / 10).toFixed(1);
 

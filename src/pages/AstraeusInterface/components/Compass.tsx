@@ -28,7 +28,7 @@ export default function Compass({ heading }: { heading: number }) {
               id="compass-direction"
               style={{
                 transform: `rotate(${heading}deg)`,
-                fontSize: "60px",
+                fontSize: "80px",
                 fontFamily: "Arial",
                 justifyContent: "center",
                 alignItems: "center",

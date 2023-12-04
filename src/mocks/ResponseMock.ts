@@ -30,7 +30,7 @@ export const MOCK_RESPONSE = {
   magnetometer_x: -3.863354,
   magnetometer_y: 0.929701,
   magnetometer_z: 5.573334,
-  heading: 320.530731,
+  heading: 130.530731,
   imu_temperature: 26.319435,
   barometer_temperature: 22.8125,
   barometer_pressure: 102090.5,

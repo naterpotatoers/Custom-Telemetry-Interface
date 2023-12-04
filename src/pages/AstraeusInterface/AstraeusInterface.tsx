@@ -64,9 +64,9 @@ export default function AstraeusInterface() {
           <div className="card">
             <h3>Motion</h3>
             <div className="grid-col-3">
-              <HalfAngleGauge value={pitch} title="Roll" gauge={"#5EE05C"} />
-              <HalfAngleGauge value={roll} title="Pitch" max={2} />
-              <HalfAngleGauge value={yaw} title="Yaw" />
+              <HalfAngleGauge value={pitch} title="Roll" min={-2} max={2} />
+              <HalfAngleGauge value={roll} title="Pitch" min={-2} max={2} />
+              <HalfAngleGauge value={yaw} title="Yaw" min={-2} max={2} />
             </div>
           </div>
           <div className="card">
