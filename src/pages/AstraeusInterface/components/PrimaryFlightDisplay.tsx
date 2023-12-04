@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { Widget } from "./Widget";
 
 interface PrimaryFlightDisplay {
   roll?: number;
@@ -25,7 +24,6 @@ export default function PrimaryFlightDisplay({
       hasText = true;
     } else if (angle % 2 == 0) {
       width = 8;
-      // hasText = true;
     }
     pitchTicks.push({ value: angle * 2.5, width: width, hasText: hasText });
   }
@@ -48,7 +46,6 @@ export default function PrimaryFlightDisplay({
   }
 
   let pitchSetpointLocation = 0;
-  // 10 * 10 + y*y < rollTickDist - 2 ^ 2
   pitchSetpointLocation = Math.min(
     Math.max(
       -(pitchSetpoint - pitch) * pitchScale,
@@ -58,15 +55,14 @@ export default function PrimaryFlightDisplay({
   );
 
   return (
-    <Widget title="Airplane">
+    <div className="flex-centered">
       <svg
-        style={{ maxWidth: "100%", maxHeight: "100%" }}
         viewBox="20 20 40 40"
         xmlns="http://www.w3.org/2000/svg"
         strokeLinecap="round"
         strokeLinejoin="round"
         stroke="black"
-        width="300px"
+        width={600}
       >
         {/* Pitch Indicator Clipping */}
         <clipPath id="roll-pitch-clip">
@@ -76,8 +72,6 @@ export default function PrimaryFlightDisplay({
         {/* Artificial Horizon Clipping */}
         <clipPath id="artificial-horizon-clip">
           <rect x={20} y={20} width={40} height={40} rx={10}></rect>
-
-          {/* <circle cx="40" cy="40" r="20"></circle> */}
         </clipPath>
 
         <g clipPath="url(#artificial-horizon-clip)">
@@ -90,7 +84,7 @@ export default function PrimaryFlightDisplay({
                 width={80}
                 height={160}
                 stroke="none"
-                fill="#77ccff"
+                fill="white"
               ></rect>
               <rect
                 x={0}
@@ -98,7 +92,7 @@ export default function PrimaryFlightDisplay({
                 width={80}
                 height={160}
                 stroke="none"
-                fill="#9e532e"
+                fill="lime"
               ></rect>
             </g>
 
@@ -197,9 +191,6 @@ export default function PrimaryFlightDisplay({
               ></path>
             );
           })}
-          {/* {#each rollTicks as tick}
-                <path d={`M ${rollTickDist * Math.sin(tick.value) + 40} ${- rollTickDist * Math.cos(tick.value) + 40} L ${(rollTickDist + tick.width) * Math.sin(tick.value) + 40} ${- (rollTickDist + tick.width) * Math.cos(tick.value) + 40}`}></path>
-                {/each} */}
         </g>
 
         {/* Roll Setpoint Indicator */}
@@ -222,15 +213,8 @@ export default function PrimaryFlightDisplay({
           <path d="M 43 40 L 40.5 40"></path>
           <path d="M 39.5 40 L 39.5 41"></path>
           <path d="M 40.5 40 L 40.5 41"></path>
-          {/* <circle cx="40" cy="40" r="1"></circle> */}
         </g>
-
-        {/* // Altitude Indicator */}
-        {/* <g>
-                <rect x="65" y="38" width="10" height="4" strokeWidth="0.15" fill="none" stroke="black"></rect>
-                <text stroke="none" x="74" y="40" textAnchor="end" dominantBaseline="central" fontSize="2px">{(altitude).toFixed(2)}</text>
-            </g> */}
       </svg>
-    </Widget>
+    </div>
   );
 }

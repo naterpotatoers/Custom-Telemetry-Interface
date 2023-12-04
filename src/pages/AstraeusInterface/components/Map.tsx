@@ -9,7 +9,7 @@ export default function Map({
 }) {
   return (
     <MapContainer
-      id="map"
+      style={{ height: "50vh", width: "100%" }}
       center={[latitude, longitude]}
       zoom={12}
       scrollWheelZoom={false}
@@ -20,7 +20,7 @@ export default function Map({
       />
       <Marker position={[latitude, longitude]}>
         <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
+          Last known location
         </Popup>
       </Marker>
     </MapContainer>

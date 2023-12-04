@@ -1,5 +1,3 @@
-import { Widget } from "./Widget";
-
 interface GaugeArgs {
   value: number;
   start?: number;
@@ -58,7 +56,7 @@ export function HorizontalLinearGauge({
   };
 
   return (
-    <Widget title={title}>
+    <div className="flex-centered">
       <div style={{ width: "150px" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +72,8 @@ export function HorizontalLinearGauge({
         </svg>
         <div style={{ fontVariantNumeric: "tabular-nums" }}>{label}</div>
       </div>
-    </Widget>
+      {title && <h4>{title}</h4>}
+    </div>
   );
 }
 
@@ -126,10 +125,9 @@ export function VerticalLinearGauge({
   };
 
   return (
-    <Widget title={title}>
+    <div className="flex-centered">
       <div
         style={{
-          height: "150px",
           display: "flex",
           alignItems: "flex-end",
           minWidth: minWidth,
@@ -147,10 +145,11 @@ export function VerticalLinearGauge({
             strokeWidth={strokeWidth}
           ></path>
         </svg>
-        <div style={{ marginLeft: "5px", fontVariantNumeric: "tabular-nums" }}>
+        <div style={{ marginLeft: ".25rem", fontVariantNumeric: "tabular-nums" }}>
           {label}
         </div>
       </div>
-    </Widget>
+      {title && <h4>{title}</h4>}
+    </div>
   );
 }

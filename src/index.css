@@ -8,8 +8,6 @@
 
 * {
     font-family: monospace;
-    /* TODO - this breaks flight display */
-    /* font-size: 1.05rem; */
 }
 
 html {
@@ -93,9 +91,21 @@ dialog::backdrop {
     margin: var(--padding);
 }
 
-.grid-col-3 {
+.grid-auto-fit {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1rem;
+}
+
+.grid-col-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+}
+
+.grid-col-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
 }
 
@@ -113,10 +123,10 @@ dialog::backdrop {
     outline: none;
 }
 
-.flex {
+.flex-centered {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -149,9 +159,4 @@ dialog::backdrop {
 
 #baudrate-input {
     width: 10ch;
-}
-
-#map {
-    height: 50vh;
-    width: 40vw;
 }
