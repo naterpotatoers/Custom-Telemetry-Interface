@@ -10,7 +10,7 @@ export default function WifiButtons({
   message: React.MutableRefObject<string>;
 }) {
   const [isConnected, setIsConnected] = useState(false);
-  const [serverAddress, setServerAddress] = useState("http://localhost:5000/");
+  const [serverAddress, setServerAddress] = useState("http://localhost:3000/");
 
   function connect() {
     clearHistory();
@@ -89,7 +89,7 @@ export default function WifiButtons({
       if (isConnected) {
         readStatus();
       }
-    }, 200);
+    }, 50);
     return () => clearInterval(writeInterval);
   }, [isConnected]);
 

@@ -16,15 +16,15 @@ export default function AstraeusInterface() {
   const message = useRef<any>("");
 
   const pitch = getPitch({
-    gyro_x: status.gyro_x,
-    gyro_y: status.gyro_y,
-    gyro_z: status.gyro_z,
+    accel_x: status.accel_x,
+    accel_y: status.accel_y,
+    accel_z: status.accel_z,
   });
 
   const roll = getRoll({
-    gyro_x: status.gyro_x,
-    gyro_y: status.gyro_y,
-    gyro_z: status.gyro_z,
+    accel_x: status.accel_x,
+    accel_y: status.accel_y,
+    accel_z: status.accel_z,
   });
 
   const yaw = getYaw({
@@ -71,9 +71,9 @@ export default function AstraeusInterface() {
           <div className="card">
             <h3>Motion</h3>
             <div className="grid-col-3">
-              <HalfAngleGauge value={pitch} title="Roll" min={-2} max={2} />
-              <HalfAngleGauge value={roll} title="Pitch" min={-2} max={2} />
-              <HalfAngleGauge value={yaw} title="Yaw" min={-2} max={2} />
+              <HalfAngleGauge value={roll} title="Roll" min={-90} max={90} />
+              <HalfAngleGauge value={pitch} title="Pitch" min={-90} max={90} />
+              <HalfAngleGauge value={yaw} title="Yaw" min={-90} max={90} />
             </div>
           </div>
           <div className="card">
