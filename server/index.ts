@@ -7,6 +7,7 @@ const app = express();
 const networkInterfaces = os.networkInterfaces();
 
 let command: any = {};
+let history: any = [];
 let status: any = {};
 
 app.use(cors());
@@ -20,8 +21,14 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
   command = req.body;
+  history.push(command);
   console.log("POST /");
   res.json(status);
+});
+
+app.get("/history", (req, res) => {
+  console.log("GET /history");
+  res.json(history);
 });
 
 app.get("/status", (req, res) => {

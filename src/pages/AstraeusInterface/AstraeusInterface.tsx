@@ -12,7 +12,7 @@ import FlightHistory from "./components/FlightHistory";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
-  const [history, setHistory] = useState<ResponseMock[]>(MOCK_RESPONSE_ARRAY);
+  const [history, setHistory] = useState<ResponseMock[]>([]);
   const message = useRef<any>("");
 
   const pitch = getPitch({
@@ -38,7 +38,11 @@ export default function AstraeusInterface() {
       <div className="flex-header">
         <h1>Astraeus Interface</h1>
         <div>
-          <WifiButtons setStatus={setStatus} message={message} />
+          <WifiButtons
+            setStatus={setStatus}
+            setHistory={setHistory}
+            message={message}
+          />
         </div>
       </div>
       <div className="section">

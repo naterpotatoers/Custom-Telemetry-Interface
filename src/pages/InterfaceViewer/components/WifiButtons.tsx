@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 
 export default function WifiButtons({
   setStatus,
+  setHistory,
   message,
 }: {
   setStatus: React.Dispatch<React.SetStateAction<any>>;
+  setHistory: React.Dispatch<React.SetStateAction<any>>;
   message: React.MutableRefObject<string>;
 }) {
   const [isConnected, setIsConnected] = useState(false);
@@ -15,6 +17,7 @@ export default function WifiButtons({
   }
 
   function disconnect() {
+    readHistory();
     setIsConnected(false);
   }
 
@@ -51,6 +54,19 @@ export default function WifiButtons({
         disconnect();
         setStatus("Unable to GET status, verify backend is running");
       }
+    }
+  }
+
+  async function readHistory() {
+    try {
+      const responseStatus = await fetch(serverAddress + "history", {
+        method: "GET",
+      });
+      const response = await responseStatus.json();
+      console.log(response);
+      setHistory(response);
+    } catch (error) {
+      console.error(error);
     }
   }
 
