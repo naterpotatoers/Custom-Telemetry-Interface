@@ -2,15 +2,17 @@ import { useRef, useState } from "react";
 import WifiButtons from "../InterfaceViewer/components/WifiButtons";
 import { HalfAngleGauge } from "./components/AngleGauges";
 import { MOCK_RESPONSE } from "../../mocks";
-import { getPitch, getRoll, getYaw } from "./util";
+import { getHistoryData, getPitch, getRoll, getYaw } from "./util";
 import { VerticalLinearGauge } from "./components/LinearGauges";
-import { ResponseMock } from "../../mocks/ResponseMock";
+import { MOCK_RESPONSE_ARRAY, ResponseMock } from "../../mocks/ResponseMock";
 import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
 import Map from "./components/Map";
 import Compass from "./components/Compass";
+import FlightHistory from "./components/FlightHistory";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
+  const [history, setHistory] = useState<ResponseMock[]>(MOCK_RESPONSE_ARRAY);
   const message = useRef<any>("");
 
   const pitch = getPitch({
@@ -102,6 +104,7 @@ export default function AstraeusInterface() {
             <PrimaryFlightDisplay roll={roll} pitch={pitch} />
           </div>
         </div>
+        <FlightHistory historyData={getHistoryData(history)} />
       </div>
     </div>
   );
