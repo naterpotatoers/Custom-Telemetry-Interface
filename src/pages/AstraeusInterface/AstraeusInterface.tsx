@@ -4,7 +4,7 @@ import { HalfAngleGauge } from "./components/AngleGauges";
 import { MOCK_RESPONSE } from "../../mocks";
 import { getHistoryData, getPitch, getRoll, getYaw } from "./util";
 import { VerticalLinearGauge } from "./components/LinearGauges";
-import { MOCK_RESPONSE_ARRAY, ResponseMock } from "../../mocks/ResponseMock";
+import { ResponseMock } from "../../mocks/ResponseMock";
 import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
 import Map from "./components/Map";
 import Compass from "./components/Compass";
@@ -22,7 +22,6 @@ export default function AstraeusInterface() {
   });
 
   const roll = getRoll({
-    accel_x: status.accel_x,
     accel_y: status.accel_y,
     accel_z: status.accel_z,
   });
@@ -30,7 +29,6 @@ export default function AstraeusInterface() {
   const yaw = getYaw({
     mag_x: status.magnetometer_x,
     mag_y: status.magnetometer_y,
-    mag_z: status.magnetometer_z,
   });
 
   return (

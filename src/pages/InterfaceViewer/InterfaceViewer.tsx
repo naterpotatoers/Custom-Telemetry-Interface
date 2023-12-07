@@ -19,10 +19,12 @@ export default function InterfaceViewer({
   messageFormat: string;
 }) {
   const [status, setStatus] = useState<string>("");
+  const [history, setHistory] = useState<Array<string>>([]);
   const [interfaceData, setInterfaceData] = useState<Array<PropertyField>>(
     getPropertyFields(schema)
   );
 
+  console.log(status,history,interfaceData);
   const output = interfaceData.reduce((acc: any, property: PropertyField) => {
     return { ...acc, [property.id]: property.value };
   }, {});
@@ -56,7 +58,7 @@ export default function InterfaceViewer({
         <h2>Interface Viewer</h2>
         <div>
           <SerialButtons setStatus={setStatus} message={message} />
-          <WifiButtons setStatus={setStatus} message={message} />
+          <WifiButtons setStatus={setStatus} setHistory={setHistory} message={message} />
         </div>
       </div>
       <div className="flex-spaced">
