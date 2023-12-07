@@ -31,6 +31,12 @@ app.get("/history", (req, res) => {
   res.json(history);
 });
 
+app.delete("/history", (req, res) => {
+  history = [];
+  console.log("DELETE /history");
+  res.json(history);
+});
+
 app.get("/status", (req, res) => {
   console.log("GET /status");
   res.json(status);

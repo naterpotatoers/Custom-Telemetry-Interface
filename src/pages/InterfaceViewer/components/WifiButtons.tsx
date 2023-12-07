@@ -13,6 +13,7 @@ export default function WifiButtons({
   const [serverAddress, setServerAddress] = useState("http://localhost:5000/");
 
   function connect() {
+    clearHistory();
     setIsConnected(true);
   }
 
@@ -61,6 +62,19 @@ export default function WifiButtons({
     try {
       const responseStatus = await fetch(serverAddress + "history", {
         method: "GET",
+      });
+      const response = await responseStatus.json();
+      console.log(response);
+      await setHistory(response);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function clearHistory() {
+    try {
+      const responseStatus = await fetch(serverAddress + "history", {
+        method: "DELETE",
       });
       const response = await responseStatus.json();
       console.log(response);
