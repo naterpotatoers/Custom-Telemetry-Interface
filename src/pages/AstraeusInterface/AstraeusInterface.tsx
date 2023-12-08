@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import WifiButtons from "../InterfaceViewer/components/WifiButtons";
 import { HalfAngleGauge } from "./components/AngleGauges";
 import { MOCK_RESPONSE } from "../../mocks";
-import { getHistoryData, getPitch, getRoll, getYaw } from "./util";
+import { getHistoryData } from "./util";
 import { VerticalLinearGauge } from "./components/LinearGauges";
 import { ResponseMock } from "../../mocks/ResponseMock";
 import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
@@ -15,21 +15,24 @@ export default function AstraeusInterface() {
   const [history, setHistory] = useState<ResponseMock[]>([]);
   const message = useRef<any>("");
 
-  const pitch = getPitch({
-    accel_x: status.accel_x,
-    accel_y: status.accel_y,
-    accel_z: status.accel_z,
-  });
+  const pitch = status.pitch;
+  // getPitch({
+  //   accel_x: status.accel_x,
+  //   accel_y: status.accel_y,
+  //   accel_z: status.accel_z,
+  // });
 
-  const roll = getRoll({
-    accel_y: status.accel_y,
-    accel_z: status.accel_z,
-  });
+  const roll = status.roll;
+  // getRoll({
+  //   accel_y: status.accel_y,
+  //   accel_z: status.accel_z,
+  // });
 
-  const yaw = getYaw({
-    mag_x: status.magnetometer_x,
-    mag_y: status.magnetometer_y,
-  });
+  const yaw = status.heading;
+  // getYaw({
+  //   mag_x: status.magnetometer_x,
+  //   mag_y: status.magnetometer_y,
+  // });
 
   return (
     <div className="section">
