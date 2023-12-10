@@ -1,21 +1,23 @@
 import { ResponseMock } from "../../mocks/ResponseMock";
 
 export type HistoryType = {
-  accelerometer: {
-    x: number[];
-    y: number[];
-    z: number[];
-  };
-  gyroscope: {
-    x: number[];
-    y: number[];
-    z: number[];
-  };
-  magnetometer: {
-    x: number[];
-    y: number[];
-    z: number[];
-  };
+  // accelerometer: {
+  //   x: number[];
+  //   y: number[];
+  //   z: number[];
+  // };
+  // gyroscope: {
+  //   x: number[];
+  //   y: number[];
+  //   z: number[];
+  // };
+  // magnetometer: {
+  //   x: number[];
+  //   y: number[];
+  //   z: number[];
+  // };
+  roll: number[];
+  pitch: number[];
   heading: number[];
   imu_temperature: number[];
   barometer: {
@@ -75,15 +77,17 @@ export function getYaw({
 export function getHistoryData(history: ResponseMock[]): HistoryType {
   return history.reduce(
     (acc: HistoryType, curr: ResponseMock) => {
-      acc.accelerometer.x.push(curr.accel_x);
-      acc.accelerometer.y.push(curr.accel_y);
-      acc.accelerometer.z.push(curr.accel_z);
-      acc.gyroscope.x.push(curr.gyro_x);
-      acc.gyroscope.y.push(curr.gyro_y);
-      acc.gyroscope.z.push(curr.gyro_z);
-      acc.magnetometer.x.push(curr.magnetometer_x);
-      acc.magnetometer.y.push(curr.magnetometer_y);
-      acc.magnetometer.z.push(curr.magnetometer_z);
+      // acc.accelerometer.x.push(curr.accel_x);
+      // acc.accelerometer.y.push(curr.accel_y);
+      // acc.accelerometer.z.push(curr.accel_z);
+      // acc.gyroscope.x.push(curr.gyro_x);
+      // acc.gyroscope.y.push(curr.gyro_y);
+      // acc.gyroscope.z.push(curr.gyro_z);
+      // acc.magnetometer.x.push(curr.magnetometer_x);
+      // acc.magnetometer.y.push(curr.magnetometer_y);
+      // acc.magnetometer.z.push(curr.magnetometer_z);
+      acc.pitch.push(curr.pitch);
+      acc.roll.push(curr.roll);
       acc.heading.push(curr.heading);
       acc.imu_temperature.push(curr.imu_temperature);
       acc.barometer.temperature.push(curr.barometer_temperature);
@@ -95,21 +99,23 @@ export function getHistoryData(history: ResponseMock[]): HistoryType {
       return acc;
     },
     {
-      accelerometer: {
-        x: [],
-        y: [],
-        z: [],
-      },
-      gyroscope: {
-        x: [],
-        y: [],
-        z: [],
-      },
-      magnetometer: {
-        x: [],
-        y: [],
-        z: [],
-      },
+      // accelerometer: {
+      //   x: [],
+      //   y: [],
+      //   z: [],
+      // },
+      // gyroscope: {
+      //   x: [],
+      //   y: [],
+      //   z: [],
+      // },
+      // magnetometer: {
+      //   x: [],
+      //   y: [],
+      //   z: [],
+      // },
+      pitch: [],
+      roll: [],
       heading: [],
       imu_temperature: [],
       barometer: {
