@@ -28,12 +28,12 @@
    ```bash
    npm start
    ```
-3. Open [http://localhost:5000/](http://localhost:5000/) with your browser to see the result.
-4. Send POST requests to [http://localhost:5000/](http://localhost:5000/) with a json body like so:
+3. Open [http://localhost:3000/](http://localhost:3000/) with your browser to see the result.
+4. Send POST requests to [http://localhost:3000/](http://localhost:3000/) with a json body like so:
    ```json
    {
      "text": "Your text here"
    }
    ```
-5. Retrieve the response from the server by making GET requests to [http://localhost:5000/](http://localhost:5000/)
+5. Retrieve the response from the server by making GET requests to [http://localhost:3000/](http://localhost:3000/)
 
