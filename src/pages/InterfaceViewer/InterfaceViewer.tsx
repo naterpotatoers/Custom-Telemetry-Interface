@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Schema, PropertyField } from "../../types";
 import { getPropertyFields } from "../../util";
-import { MOCK_RESPONSE } from "../../mocks";
+import { DEFAULT_ASTRAEUS_RESPONSE } from "../../mocks";
 import {
   convertSchemaTypeToInputType,
   getFormattedMessage,
@@ -47,7 +47,7 @@ export default function InterfaceViewer({
 
   useEffect(() => {
     message.current = getFormattedMessage(messageFormat, output);
-    message.current = JSON.stringify(MOCK_RESPONSE);
+    message.current = JSON.stringify(DEFAULT_ASTRAEUS_RESPONSE);
   }, [output]);
 
   const formattedMessage = getFormattedMessage(messageFormat, interfaceData);

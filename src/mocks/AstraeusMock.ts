@@ -1,37 +1,6 @@
-export type ResponseMock = {
-  // accel_x: number;
-  // accel_y: number;
-  // accel_z: number;
-  // gyro_x: number;
-  // gyro_y: number;
-  // gyro_z: number;
-  // magnetometer_x: number;
-  // magnetometer_y: number;
-  // magnetometer_z: number;
-  roll: number;
-  pitch: number;
-  heading: number;
-  imu_temperature: number;
-  barometer_temperature: number;
-  barometer_pressure: number;
-  barometer_altitude: number;
-  gps_latitude: number;
-  gps_longitude: number;
-  gps_satellite_count: number;
-  gps_altitude: number;
-  gps_time: number;
-};
+import { AstraeusType } from "../types";
 
-export const MOCK_RESPONSE = {
-  // accel_x: 0.0,
-  // accel_y: 0.0,
-  // accel_z: 0.0,
-  // gyro_x: 0.0,
-  // gyro_y: 0.0,
-  // gyro_z: 0.0,
-  // magnetometer_x: 0.0,
-  // magnetometer_y: 0.0,
-  // magnetometer_z: 0.0,
+export const DEFAULT_ASTRAEUS_RESPONSE: AstraeusType = {
   roll: 0.0,
   pitch: 0.0,
   heading: 0.0,
@@ -46,17 +15,8 @@ export const MOCK_RESPONSE = {
   gps_time: 0.0,
 };
 
-export const MOCK_RESPONSE_ARRAY: ResponseMock[] = [
+export const MOCK_ASTRAEUS_RESPONSE_ARRAY: AstraeusType[] = [
   {
-    // accel_x: -0.00293,
-    // accel_y: -0.002197,
-    // accel_z: 1.015381,
-    // gyro_x: 0.984192,
-    // gyro_y: -0.312805,
-    // gyro_z: 0.015259,
-    // magnetometer_x: -3.863354,
-    // magnetometer_y: 0.929701,
-    // magnetometer_z: 5.573334,
     roll: 2.87601,
     pitch: 12.44892,
     heading: 100.530731,

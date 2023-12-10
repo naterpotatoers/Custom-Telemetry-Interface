@@ -1,38 +1,25 @@
 import { useRef, useState } from "react";
-import WifiButtons from "../InterfaceViewer/components/WifiButtons";
-import { HalfAngleGauge } from "./components/AngleGauges";
-import { MOCK_RESPONSE } from "../../mocks";
+import { AstraeusType } from "../../types";
 import { getHistoryData } from "./util";
-import { VerticalLinearGauge } from "./components/LinearGauges";
-import { ResponseMock } from "../../mocks/ResponseMock";
-import PrimaryFlightDisplay from "./components/PrimaryFlightDisplay";
-import Map from "./components/Map";
-import Compass from "./components/Compass";
-import FlightHistory from "./components/FlightHistory";
+import { DEFAULT_ASTRAEUS_RESPONSE } from "../../mocks";
+import WifiButtons from "../InterfaceViewer/components/WifiButtons";
+import {
+  Compass,
+  FlightHistory,
+  HalfAngleGauge,
+  PrimaryFlightDisplay,
+  VerticalLinearGauge,
+  Map,
+} from "./components";
 
 export default function AstraeusInterface() {
-  const [status, setStatus] = useState<ResponseMock>(MOCK_RESPONSE);
-  const [history, setHistory] = useState<ResponseMock[]>([]);
+  const [status, setStatus] = useState<AstraeusType>(DEFAULT_ASTRAEUS_RESPONSE);
+  const [history, setHistory] = useState<AstraeusType[]>([]);
   const message = useRef<any>("");
 
   const pitch = status.pitch;
-  // getPitch({
-  //   accel_x: status.accel_x,
-  //   accel_y: status.accel_y,
-  //   accel_z: status.accel_z,
-  // });
-
   const roll = status.roll;
-  // getRoll({
-  //   accel_y: status.accel_y,
-  //   accel_z: status.accel_z,
-  // });
-
   const yaw = status.heading;
-  // getYaw({
-  //   mag_x: status.magnetometer_x,
-  //   mag_y: status.magnetometer_y,
-  // });
 
   return (
     <div className="section">
@@ -59,11 +46,11 @@ export default function AstraeusInterface() {
                 value={status.imu_temperature}
                 title="IMU"
                 max={50}
-                min={0}
+                min={-1}
               />
               <VerticalLinearGauge
                 max={40}
-                min={0}
+                min={-1}
                 value={status.barometer_temperature}
                 title="Barometer"
               />
@@ -83,13 +70,13 @@ export default function AstraeusInterface() {
               <VerticalLinearGauge
                 value={status.barometer_pressure}
                 max={200000}
-                min={0}
+                min={-1}
                 title="Pressure"
               />
               <VerticalLinearGauge
                 value={status.barometer_altitude}
                 title="Altitude"
-                min={0}
+                min={-1}
                 max={300}
               />
             </div>
