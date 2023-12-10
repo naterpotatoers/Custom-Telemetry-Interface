@@ -1,13 +1,46 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Astraeus UI</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/small.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astraeus UI</title>
+  <!-- Keep Description between 150-165 Characters (including White Spaces)-->
+  <meta name="description"
+    content="User interface for Astraeus. Astraeus is a multipurpose board designed for advanced avionic systems built using the libhal open source embedded framework.">
+  <!-- OpenGraph Metadata-->
+  <meta property="og:title" content="Astraeus-UI" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description"
+    content="User interface for Astraeus. Astraeus is a multipurpose board designed for advanced avionic systems built using the libhal open source embedded framework." />
+  <meta property="og:image" content="https://astraeus-i.github.io/assets/logo.png" />
+  <meta property="og:url" content="https://astraeus-i.github.io/">
+  <script type="application/ld+json">
+ {
+   "@context": "https://schema.org",
+   "@type": "Organization",
+   "url": "https://astraeus-i.github.io/",
+   "logo": "https://astraeus-i.github.io/assets/logo.png"
+ }
+ </script>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/small.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/small.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/small.ico">
+  <link rel="mask-icon" href="/small.ico">
+  <link rel="shortcut icon" href="/small.ico">
+  <meta name="apple-mobile-web-app-title" content="Astraeus-UI">
+  <meta name="application-name" content="Astraeus-UI">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="theme-color" content="#000000">
+  <!-- <link rel="manifest" href="/site.webmanifest?v=1"> -->
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
