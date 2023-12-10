@@ -12,10 +12,11 @@ import {
   Map,
 } from "../../components/common";
 
+import Logo from "../../assets/logo.png";
+
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<AstraeusType>(DEFAULT_ASTRAEUS_RESPONSE);
   const [history, setHistory] = useState<AstraeusType[]>([]);
-  const message = useRef<any>("");
 
   const pitch = status.pitch;
   const roll = status.roll;
@@ -24,13 +25,20 @@ export default function AstraeusInterface() {
   return (
     <div className="section">
       <div className="flex-header">
-        <h1>Astraeus Interface</h1>
-        <div>
-          <WifiButtons
-            setStatus={setStatus}
-            setHistory={setHistory}
-            message={message}
+        <h1>
+          <img
+            src={Logo}
+            style={{
+              width: "50px",
+              marginRight: "10px",
+              verticalAlign: "middle",
+            }}
+            alt="Astraeus Logo"
           />
+          Astraeus Interface
+        </h1>
+        <div>
+          <WifiButtons setStatus={setStatus} setHistory={setHistory} />
         </div>
       </div>
       <div className="section">

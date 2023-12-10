@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 export default function WifiButtons({
   setStatus,
   setHistory,
-  message,
 }: {
   setStatus: React.Dispatch<React.SetStateAction<any>>;
   setHistory: React.Dispatch<React.SetStateAction<any>>;
-  message: React.MutableRefObject<string>;
 }) {
   const [isConnected, setIsConnected] = useState(false);
   const [serverAddress, setServerAddress] = useState("http://localhost:3000/");
@@ -23,7 +21,6 @@ export default function WifiButtons({
   }
 
   async function readStatus() {
-    console.log("message", message.current);
     if (isConnected) {
       try {
         const responseStatus = await fetch(serverAddress, {
