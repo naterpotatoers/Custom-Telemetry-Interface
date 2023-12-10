@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { AstraeusType } from "../../types";
 import { getHistoryData } from "./util";
 import { DEFAULT_ASTRAEUS_RESPONSE } from "../../mocks";
