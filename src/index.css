@@ -51,8 +51,7 @@ button:hover {
 }
 
 input,
-select,
-.custom-dropdown-input-selector>label {
+select {
     border: none;
     color: var(--primary);
     padding: var(--padding);
@@ -74,7 +73,6 @@ dialog {
     position: fixed;
 }
 
-/* TODO: Make this actually work */
 dialog::backdrop {
     background: black !important;
     opacity: 0.5;
@@ -83,12 +81,6 @@ dialog::backdrop {
 .section {
     margin: var(--padding);
     padding: var(--padding);
-}
-
-.form-input {
-    display: flex;
-    flex-direction: column;
-    margin: var(--padding);
 }
 
 .grid-auto-fit {
@@ -109,20 +101,6 @@ dialog::backdrop {
     grid-gap: 1rem;
 }
 
-.custom-dropdown-input-selector {
-    display: inline-flex;
-    border: none;
-    color: var(--primary);
-    accent-color: var(--accent);
-    background-color: var(--secondary);
-    border-radius: var(--border-radius);
-}
-
-.custom-dropdown-input-selector>select {
-    padding: 0;
-    outline: none;
-}
-
 .flex-centered {
     display: flex;
     flex-direction: column;
@@ -138,17 +116,6 @@ dialog::backdrop {
     margin: 0 var(--padding);
 }
 
-.close-btn {
-    margin: 0;
-    box-shadow: none;
-    font-size: 1.5rem;
-}
-
-.close-btn:hover {
-    color: var(--accent);
-    box-shadow: none !important;
-}
-
 .card {
     position: relative;
     overflow:hidden;
@@ -157,8 +124,4 @@ dialog::backdrop {
     padding: var(--padding);
     border-radius: var(--border-radius);
     box-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;
-}
-
-#baudrate-input {
-    width: 10ch;
 }
