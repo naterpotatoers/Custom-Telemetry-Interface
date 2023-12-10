@@ -9,7 +9,7 @@ export default function Map({
 }) {
   return (
     <MapContainer
-      style={{ height: "50vh", width: "100%" }}
+      style={{ height: "100%", width: "100%", minHeight: "500px" }}
       center={[latitude, longitude]}
       zoom={12}
       scrollWheelZoom={false}

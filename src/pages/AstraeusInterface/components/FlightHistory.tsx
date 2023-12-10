@@ -11,8 +11,6 @@ export default function FlightHistory({ historyData }: any) {
           <h3>Heading</h3>
           <pre>{JSON.stringify(historyData.heading, null, 2)}</pre>
         </div>
-      </div>
-      <div className="grid-col-2">
         <div className="card">
           <h3>IMU Temperature</h3>
           <pre>{JSON.stringify(historyData.imu_temperature, null, 2)}</pre>

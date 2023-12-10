@@ -62,7 +62,7 @@ export default function PrimaryFlightDisplay({
         strokeLinecap="round"
         strokeLinejoin="round"
         stroke="black"
-        width={600}
+        width={500}
       >
         {/* Pitch Indicator Clipping */}
         <clipPath id="roll-pitch-clip">

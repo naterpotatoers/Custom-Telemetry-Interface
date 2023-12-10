@@ -150,6 +150,8 @@ dialog::backdrop {
 }
 
 .card {
+    position: relative;
+    overflow:hidden;
     background: none;
     margin: var(--padding);
     padding: var(--padding);
