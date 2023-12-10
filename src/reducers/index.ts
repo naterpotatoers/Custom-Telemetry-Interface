@@ -1,1 +1,0 @@
-export {schemaReducer} from "./schemaReducer";

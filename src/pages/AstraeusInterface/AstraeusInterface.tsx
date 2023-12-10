@@ -2,15 +2,15 @@ import { useRef, useState } from "react";
 import { AstraeusType } from "../../types";
 import { getHistoryData } from "./util";
 import { DEFAULT_ASTRAEUS_RESPONSE } from "../../mocks";
-import WifiButtons from "../InterfaceViewer/components/WifiButtons";
 import {
   Compass,
   FlightHistory,
   HalfAngleGauge,
   PrimaryFlightDisplay,
   VerticalLinearGauge,
+  WifiButtons,
   Map,
-} from "./components";
+} from "../../components/common";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<AstraeusType>(DEFAULT_ASTRAEUS_RESPONSE);

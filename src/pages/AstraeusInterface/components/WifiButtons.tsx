@@ -22,24 +22,6 @@ export default function WifiButtons({
     setIsConnected(false);
   }
 
-  // async function writeMessage() {
-  //   if (isConnected) {
-  //     try {
-  //       const responseStatus = await fetch(serverAddress, {
-  //         method: "POST",
-  //         body: message.current,
-  //       });
-  //       const response = await responseStatus.text();
-  //       console.log(response);
-  //       setStatus(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //       disconnect();
-  //       setStatus("Unable to post message, verify backend is running");
-  //     }
-  //   }
-  // }
-
   async function readStatus() {
     console.log("message", message.current);
     if (isConnected) {
