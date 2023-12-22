@@ -1,3 +1,4 @@
+import Logo from "../../assets/logo.png";
 import { useState } from "react";
 import { AstraeusType } from "../../types";
 import { getHistoryData } from "./util";
@@ -12,7 +13,6 @@ import {
   Map,
 } from "../../components/common";
 
-import Logo from "../../assets/logo.png";
 
 export default function AstraeusInterface() {
   const [status, setStatus] = useState<AstraeusType>(DEFAULT_ASTRAEUS_RESPONSE);
