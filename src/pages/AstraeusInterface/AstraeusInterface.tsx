@@ -11,7 +11,7 @@ import {
   VerticalLinearGauge,
   WifiButtons,
   Map,
-} from "../../components/common";
+} from "../../components/widgets";
 
 
 export default function AstraeusInterface() {

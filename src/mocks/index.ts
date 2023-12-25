@@ -1,4 +1,4 @@
-import { AstraeusType } from "../types";
+import { AstraeusType, Schema } from "../types";
 
 export const DEFAULT_ASTRAEUS_RESPONSE: AstraeusType = {
   roll: 0.0,
@@ -101,3 +101,107 @@ export const MOCK_ASTRAEUS_RESPONSE_ARRAY: AstraeusType[] = [
     gps_time: 21.0,
   },
 ];
+
+export const MOCK_ASTRAEUS_JSON_SCHEMA: Schema = {
+  $id: "https://example.com/person.schema.json",
+  $schema: "http://json-schema.org/draft-07/schema#",
+  title: "Astraeus",
+  type: "object",
+  properties: {
+    roll: {
+      title: "Roll",
+      type: "number",
+      description: "Roll",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    pitch: {
+      title: "Pitch",
+      type: "number",
+      description: "Pitch",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    heading: {
+      title: "Heading",
+      type: "number",
+      description: "Heading",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    imu_temperature: {
+      title: "IMU Temperature",
+      type: "number",
+      description: "IMU Temperature",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    barometer_temperature: {
+      title: "Barometer Temperature",
+      type: "number",
+      description: "Barometer Temperature",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    barometer_pressure: {
+      title: "Barometer Pressure",
+      type: "number",
+      description: "Barometer Pressure",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    barometer_altitude: {
+      title: "Barometer Altitude",
+      type: "number",
+      description: "Barometer Altitude",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    gps_latitude: {
+      title: "GPS Latitude",
+      type: "number",
+      description: "GPS Latitude",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    gps_longitude: {
+      title: "GPS Longitude",
+      type: "number",
+      description: "GPS Longitude",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    gps_satellite_count: {
+      title: "GPS Satellite Count",
+      type: "number",
+      description: "GPS Satellite Count",
+      default: 0,
+      minimum: -180
+    },
+    gps_altitude: {
+      title: "GPS Altitude",
+      type: "number",
+      description: "GPS Altitude",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+    gps_time: {
+      title: "GPS Time",
+      type: "number",
+      description: "GPS Time",
+      default: 0,
+      minimum: -180,
+      maximum: 180,
+    },
+  },
+};
